@@ -17,7 +17,7 @@ function get_conection(){
 
 function register($conn,$email,$password){
     $collection = $conn->whiteboard->users;
-    $result = $collection->insertOne( [ 'email' => $email, 'password' => $password ] );
+    $result = $collection->insertOne( [ 'email' => $email, 'password' => $password , 'workflows' => []] );
     echo "Inserted with Object ID '{$result->getInsertedId()}'";
 }
 
@@ -33,5 +33,52 @@ function login($conn,$email,$password){
        
     }
     return false;
+
+}
+
+function createWorkflow($conn,$user,$name,$description){
+
+ //Add workflow to user
+ $collection = $conn->whiteboard->users;
+ $filter = array('email'=>$user);
+ $update = array('$push'=>array('workflows'=>[ 'name' => $name, 'creation_date' => date("d/m/Y H:i:s"),'description'=> $description ,'states' => ['Sin iniciar','Iniciado','Finalizado'],'stickies' => []]));   
+ $collection->updateOne($filter,$update);
+
+}
+//Name, description
+function updateWorkflow(){
+
+}
+
+function addState(){
+
+}
+
+function deleteState(){
+
+
+}
+
+function deleteWorkflow(){
+
+}
+
+function createSticky(){
+
+}
+
+function updateStickyText(){
+
+}
+
+function updateStickyColor(){
+
+}
+
+function updateStickyPosition(){
+
+}
+
+function updateStickySize(){
 
 }
