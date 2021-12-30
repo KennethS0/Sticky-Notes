@@ -58,6 +58,9 @@ function newWorkflow() {
   xhttp.send(formData);
 }
 
+
+
+
 function newSticky() {
   text = document.getElementById("text").value;
   workflowName = document.getElementById("workflowName").value;

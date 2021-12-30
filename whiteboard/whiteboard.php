@@ -1,3 +1,9 @@
+<?php
+
+  require 'connection.php'
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -13,19 +19,34 @@
     
     <div class="sidenav">
       <p>Username</p>
+      <button>Log out</button>
       <hr>
 
-      <form action="whiteboard.html">
-        <label for="board_in">Make a new board:</label>
-        <input type="text" name="board" id="board_in" minlength="5" required>
-        <button onclick="create_board()">Create!</button>
+      <form action="whiteboard.php">
+        <label for="name"><b>Name <br/>   </b> </label>
+        <input id="name" type="text" minlength="5" required>
+        <br></br>
+        <label for="description"><b>Description <br/>  </b> </label>
+        <input id="description" type="text" required>
+        <br></br>
+        <button class="buttonRight" onclick="newWorkflow()">New Workflow</button>
+        <br></br>
       </form>
      
       
       <hr>
       
       <div id="boards_area">
-        <button>AQUI</button>
+
+        <?php
+
+          foreach(getWorkFlows() as $item)
+          {
+            foreach($item->workflows as $wf) {
+              echo '<button onclick="test(\''.$wf->name.'\')">'.$wf->name.'</button>';
+            } 
+          }
+        ?>
       </div>
     </div>
 
@@ -60,14 +81,7 @@
             <td width="340" height="700" contenteditable="true"></td>
             <td width="340" height="700" contenteditable="true"></td>
             <td width="340" height="700" contenteditable="false">
-              <label for="name"><b>Name <br/>   </b> </label>
-              <input id="name" type="text" />
-              <br></br>
-              <label for="description"><b>Description <br/>  </b> </label>
-              <input id="description" type="text" />
-              <br></br>
-              <button class="buttonRight" onclick="newWorkflow()">New Workflow</button>
-              <br></br>
+              
               <label for="text"><b>Text <br/>   </b> </label>
               <input id="text" type="text" />
               <br></br>

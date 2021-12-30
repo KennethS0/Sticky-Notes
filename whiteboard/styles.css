@@ -46,7 +46,7 @@ p::first-letter {
   z-index: 1;
   top: 0;
   left: 0;
-  background-color: #111;
+  background-color: rgb(179, 156, 189);
   overflow-x: hidden;
   padding-top: 20px;
 }

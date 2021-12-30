@@ -36,15 +36,25 @@ function login($conn,$email,$password){
 
 }
 
-function createWorkflow($conn,$user,$name,$description){
+function createWorkflow($conn, $user, $name, $description){
 
  //Add workflow to user
  $collection = $conn->whiteboard->users;
  $filter = array('email'=>$user);
  $update = array('$push'=>array('workflows'=>[ 'name' => $name, 'creation_date' => date("d/m/Y H:i:s"),'description'=> $description ,'states' => ['Sin iniciar','Iniciado','Finalizado'],'stickies' => []]));   
- $collection->updateOne($filter,$update);
+ $collection->updateOne($filter, $update);
 
 }
+
+function getWorkFlows() {
+    $conn = get_conection();
+    $collection = $conn->whiteboard->users;
+    $res = $collection->find(['email' => 'lisethGonz6'], ['workflows' => 'true']);
+    return $res;
+}
+
+
+
 //Name, description
 function updateWorkflow(){
 
@@ -81,4 +91,12 @@ function updateStickyPosition(){
 
 function updateStickySize(){
 
+}
+
+
+if (isset($_REQUEST["option"]) == 4)
+{
+    $conn = get_conection();
+    $email = $_REQUEST["email"];
+    $datos = getWorkFlows($conn, $email);
 }
