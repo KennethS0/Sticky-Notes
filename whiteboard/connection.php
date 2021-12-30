@@ -72,10 +72,57 @@ function deleteState(){
 function deleteWorkflow(){
 
 }
+function getLastPosition($conn,$email,$name){
+    $collection = $conn->whiteboard->users;
+    $email = $email;
+    $result = $collection->find(['email' => $email]);
 
-function createSticky(){
+    foreach($result as $document){
+      
+        $workflows = $document->workflows;
+
+
+        foreach($workflows as $workflow){
+            
+            if($workflow->name == $name){
+            
+                $array = $workflow->stickies;              
+                $position = ($array[count($array)-1]->position + 1);
+                return $position;
+            }
+        }
+            
+           
+    }
+    return 1;
 
 }
+
+function createSticky($conn,$email,$name,$text,$state,$color,$size){
+    $collection = $conn->whiteboard->users;
+    $result = $collection->find(['email' => $email]);
+
+    foreach($result as $document){
+      
+        $workflows = $document->workflows;
+
+
+        foreach($workflows as $workflow){
+            
+            if($workflow->name == $name){
+                $position = getLastPosition($conn,$email,$name);
+                $array = $workflow->stickies;              
+                $array->append(['text' => $text, 'state' => $state,'color'=>$color,'size'=>$size,'position'=>$position]);
+                $workflow->stickies= $array;
+                $filter = array('email'=>$email);
+                $update = array('$set'=>array('workflows'=>$workflows));   
+                $collection->updateOne($filter,$update);
+         
+            }
+        }
+            
+           
+    }}
 
 function updateStickyText(){
 

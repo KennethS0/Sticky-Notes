@@ -58,17 +58,12 @@ function newWorkflow() {
   xhttp.send(formData);
 }
 
-
-
-
 function newSticky() {
   text = document.getElementById("text").value;
   workflowName = document.getElementById("workflowName").value;
   state = document.getElementById("state").value;
   color = document.getElementById("color").value;
   size = document.getElementById("size").value;
-  posX = document.getElementById("posX").value;
-  posY = document.getElementById("posY").value;
 
   var xhttp = new XMLHttpRequest();
   xhttp.open("POST", "sticky.php", false);
@@ -80,7 +75,5 @@ function newSticky() {
   formData.append("state", state);
   formData.append("color", color);
   formData.append("size", size);
-  formData.append("posX", posX);
-  formData.append("posY", posY);
   xhttp.send(formData);
 }
