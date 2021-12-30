@@ -82,6 +82,13 @@ p::first-letter {
   padding: 0px 10px;
 }
 
+#mainTable{
+  width:100%;
+  border-style: solid;
+  border-color: rgb(152, 150, 245);
+  border-collapse: collapse;
+}
+
 @media screen and (max-height: 450px) {
   .sidenav {padding-top: 15px;}
   .sidenav button {font-size: 18px;}
