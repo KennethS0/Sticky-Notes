@@ -87,11 +87,6 @@
              <label for="size"><b>Size <br/>  </b> </label>
               <input id="size" type="text" />
               <br></br>
-              <label for="posX"><b>PosX <br/>  </b> </label>
-              <input id="posX" type="text" />
-              <br></br>
-              <label for="posY"><b>PosY <br/>  </b> </label>
-              <input id="posY" type="text" />
               <br></br>
               <button class="buttonRight" onclick="newSticky()">New Sticky</button>
             </td>

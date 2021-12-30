@@ -22,8 +22,16 @@ $conn = get_conection();
 //3 delete workflow
 if (isset($_REQUEST["option"]) == 1)
 {
-    
-    createWorkflow($conn,$email,$name,$description);
+
+    if(existWorkflow($conn,$email,$name)){
+        echo ("[false,{'Error': 'Ya existe un Workflow con ese nombre.'}]"); 
+        exit();
+    }
+    else{
+        createWorkflow($conn,$email,$name,$description);
+    }
+   
+
     
 }
 if (isset($_REQUEST["option"]) == 2)

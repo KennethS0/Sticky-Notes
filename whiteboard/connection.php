@@ -23,7 +23,6 @@ function register($conn,$email,$password){
 
 function login($conn,$email,$password){
     $collection = $conn->whiteboard->users;
-  
     $result = $collection->find();
     foreach ($result as $document) {
         if($document["email"] == $email AND $document["password"] == $password){
@@ -34,6 +33,27 @@ function login($conn,$email,$password){
     }
     return false;
 
+}
+
+//Check if workflow already exist on the user
+function existWorkflow($conn, $user, $name){
+    
+    $collection = $conn->whiteboard->users;
+    $result = $collection->find(['email' => $user]);
+    foreach($result as $document){
+        
+        $workflows = $document->workflows;
+        foreach($workflows as $workflow){
+            if($workflow->name == $name){
+                return true;
+                exit();
+            }
+
+        }
+  
+    }
+
+    return false;
 }
 
 function createWorkflow($conn, $user, $name, $description){
@@ -53,30 +73,74 @@ function getWorkFlows() {
     return $res;
 }
 
+//Update workflow name
+function updateWorkflowName($conn, $user, $name, $newName){
+    $collection = $conn->whiteboard->users;
+    $result = $collection->find(['email' => $user]);
+    foreach($result as $document){
+        
+        $workflows = $document->workflows;
+        foreach($workflows as $workflow){
+            if($workflow->name == $name){
+                $workflow->name = $newName;
+                $filter = array('email'=>$email);
+                $update = array('$set'=>array('workflows'=>$workflows));   
+                $collection->updateOne($filter,$update);
+            }
 
-
-//Name, description
-function updateWorkflow(){
+        }
+  
+    }
 
 }
 
-function addState(){
+//Update workflow description
+function updateWorkflowDescription($conn, $user, $name, $newDescription){
+    $collection = $conn->whiteboard->users;
+    $result = $collection->find(['email' => $user]);
+    foreach($result as $document){
+        
+        $workflows = $document->workflows;
+        foreach($workflows as $workflow){
+            if($workflow->name == $name){
+                $workflow->description = $newDescription;
+                $filter = array('email'=>$email);
+                $update = array('$set'=>array('workflows'=>$workflows));   
+                $collection->updateOne($filter,$update);
+            }
+
+        }
+  
+    }
 
 }
 
+//Check if state already exist on the workflow
+function existState(){
+
+}
+
+//Add new state to workflow
+function addState($conn, $user, $name,$newState){
+
+}
+
+//Delete workflow state
 function deleteState(){
 
 
 }
 
+//Delete user workflow
 function deleteWorkflow(){
 
 }
-function getLastPosition($conn,$email,$name){
+//Get the position of the last sticky in the state
+function getLastPosition($conn,$email,$name,$state){
     $collection = $conn->whiteboard->users;
     $email = $email;
     $result = $collection->find(['email' => $email]);
-
+    $position = 1;
     foreach($result as $document){
       
         $workflows = $document->workflows;
@@ -86,18 +150,24 @@ function getLastPosition($conn,$email,$name){
             
             if($workflow->name == $name){
             
-                $array = $workflow->stickies;              
-                $position = ($array[count($array)-1]->position + 1);
-                return $position;
+                $stickies = $workflow->stickies;  
+
+                foreach($stickies as $sticky){
+                    if($sticky->state == $state and $sticky->position >= $position){
+                        $position = $sticky->position + 1;
+                    }
+                }           
+                
             }
         }
             
            
     }
-    return 1;
+    return $position;
 
 }
 
+//Create new sticky on the workflow 
 function createSticky($conn,$email,$name,$text,$state,$color,$size){
     $collection = $conn->whiteboard->users;
     $result = $collection->find(['email' => $email]);
@@ -110,7 +180,7 @@ function createSticky($conn,$email,$name,$text,$state,$color,$size){
         foreach($workflows as $workflow){
             
             if($workflow->name == $name){
-                $position = getLastPosition($conn,$email,$name);
+                $position = getLastPosition($conn,$email,$name,$state);
                 $array = $workflow->stickies;              
                 $array->append(['text' => $text, 'state' => $state,'color'=>$color,'size'=>$size,'position'=>$position]);
                 $workflow->stickies= $array;
@@ -124,7 +194,8 @@ function createSticky($conn,$email,$name,$text,$state,$color,$size){
            
     }}
 
-function updateStickyText(){
+
+    function updateStickyText(){
 
 }
 
