@@ -9,6 +9,29 @@
     <script src="script.js"></script>
   </head>
   <body>
+    
+    
+    <div class="sidenav">
+      <p>Username</p>
+      <hr>
+
+      <form action="whiteboard.html">
+        <label for="board_in">Make a new board:</label>
+        <input type="text" name="board" id="board_in" minlength="5" required>
+        <button onclick="create_board()">Create!</button>
+      </form>
+     
+      
+      <hr>
+      
+      <div id="boards_area">
+        <button>AQUI</button>
+      </div>
+    </div>
+
+    <div class="main">
+
+    
     <div class="board">
       <table
         width="100%"
@@ -72,6 +95,12 @@
         </tbody>
         <tfoot></tfoot>
       </table>
+    <link rel="stylesheet" href="styles.css" />    
     </div>
+
+    
+
   </body>
+
+  <script src="whiteboard.js"></script>
 </html>

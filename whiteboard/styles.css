@@ -30,10 +30,59 @@
 p::first-letter {
   text-transform: uppercase;
 }
+
 .board {
   width: 85%;
-
   text-align: center;
-
   position: absolute;
+}
+
+/* SIDE BAR */
+
+.sidenav {
+  height: 100%;
+  width: 160px;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: #111;
+  overflow-x: hidden;
+  padding-top: 20px;
+}
+
+.sidenav button {
+  padding: 0;
+  width: 100%;
+  text-decoration: none;
+  font-size: 25px;
+  color: #818181;
+  display: block;
+}
+
+.sidenav p {
+  padding: 0px 20px;
+  text-decoration: none;
+  font-size: 25px;
+  color: #ffffff;
+  display: block;
+}
+
+.sidenav button:hover {
+  color: #f1f1f1;
+}
+
+.sidenav #create_new_board {
+  color: red;
+}
+
+.main {
+  margin-left: 160px; /* Same as the width of the sidenav */
+  font-size: 28px; /* Increased text to enable scrolling */
+  padding: 0px 10px;
+}
+
+@media screen and (max-height: 450px) {
+  .sidenav {padding-top: 15px;}
+  .sidenav button {font-size: 18px;}
 }
