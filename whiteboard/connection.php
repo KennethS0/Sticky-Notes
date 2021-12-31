@@ -49,7 +49,7 @@ function createWorkflow($conn, $user, $name, $description){
 function getWorkFlows() {
     $conn = get_conection();
     $collection = $conn->whiteboard->users;
-    $res = $collection->find(['email' => 'lisethGonz6'], ['workflows' => 'true']);
+    $res = $collection->findOne(['email' => 'lisethGonz6']);
     return $res;
 }
 
