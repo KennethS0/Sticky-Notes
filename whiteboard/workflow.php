@@ -14,7 +14,7 @@ if(!isset($_REQUEST["name"]) && !isset($_REQUEST["description"]))
 }
 $email=$_REQUEST["email"];
 $name=$_REQUEST["name"];
-$description=$_REQUEST["description"];
+
 $conn = get_conection();
 //option 1,2,3
 //1 new workflow
@@ -22,7 +22,7 @@ $conn = get_conection();
 //3 delete workflow
 if (isset($_REQUEST["option"]) == 1)
 {
-
+    $description=$_REQUEST["description"];
     if(existWorkflow($conn,$email,$name)){
         echo ("[false,{'Error': 'Ya existe un Workflow con ese nombre.'}]"); 
         exit();
@@ -36,7 +36,42 @@ if (isset($_REQUEST["option"]) == 1)
 }
 if (isset($_REQUEST["option"]) == 2)
 {
-    updateWorkflow($conn,$name,$description);
+    //Update name action = 1
+    //Update description action = 2
+    //Add state action = 3
+    //Delete state action = 4
+
+    if(isset($_REQUEST["action"]) == 1){
+
+        $newName=$_REQUEST["newName"];
+        updateWorkflowName($conn, $email, $name, $newName);
+
+    }elseif(isset($_REQUEST["action"]) == 2){
+
+        $newDescription=$_REQUEST["newDescription"];
+        updateWorkflowDescription($conn, $email, $name, $newDescription);
+
+    }elseif(isset($_REQUEST["action"]) == 3){
+
+        $state=$_REQUEST["state"];
+        if(existState($conn, $email, $name,$state)){
+            echo ("[false,{'Error':'El estado ya existe en el workflow'}]");
+            exit();
+        }else{
+            addState($conn, $email, $name,$state);
+        }
+
+    }elseif(isset($_REQUEST["action"]) == 4){
+
+        $state=$_REQUEST["state"];
+        if(!existState($conn, $email, $name,$state)){
+            echo ("[false,{'Error':'El estado que desea eliminar no existe en el workflow'}]");
+            exit();
+        }else{
+            deleteState($conn, $email, $name,$state);
+        }
+    }
+   
     
 }
 

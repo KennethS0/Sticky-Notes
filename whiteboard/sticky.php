@@ -20,17 +20,19 @@ $color=$_REQUEST["color"];
 $size = $_REQUEST["size"];
 $conn = get_conection();
 
-if (isset($_REQUEST["new"]) == true)
-{
+if (isset($_REQUEST["option"]) == 1)
+{   
+    if(existSticky($conn,$email,$name,$text)){
+        echo ("[false,{'Error':'El sticky ya existe en el workflow'}]");
+        exit();
+    }
+    else{
+        createSticky($conn,$email,$name,$text,$state,$color,$size);
+    }
                 
-    createSticky($conn,$email,$name,$text,$state,$color,$size);
-}
-
-
-if (isset($_REQUEST["new"]) == false)
-{
-    createSticky($conn,$email,$name,$text,$state,$color,$size);
     
 }
+
+
 
 ?>

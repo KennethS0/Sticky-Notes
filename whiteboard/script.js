@@ -55,8 +55,6 @@ function newWorkflow() {
 
       if (respuesta[0] == false) {
         alert(JSON.stringify(respuesta[1]));
-      } else {
-        window.location.href = "whiteboard.html";
       }
     }
   };
@@ -77,6 +75,15 @@ function newSticky() {
   size = document.getElementById("size").value;
 
   var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function () {
+    if (this.readyState == 4 && this.status == 200) {
+      respuesta = eval("(" + xhttp.responseText + ")");
+
+      if (respuesta[0] == false) {
+        alert(JSON.stringify(respuesta[1]));
+      }
+    }
+  };
   xhttp.open("POST", "sticky.php", false);
   var formData = new FormData();
   formData.append("option", 1);
