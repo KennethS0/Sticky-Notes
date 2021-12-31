@@ -64,18 +64,28 @@
         <table id="mainTable">
           <thead>
             <tr id="tableHeaders">
-              <th>Header 1</th>
-              <th>Header 2</th>
-              <th>Header 3</th>
+              <th header="1">Header 1</th>
+              <th header="2">Header 2</th>
+              <th header="3">Header 3</th>
             </tr>
           </thead>
 
           <tbody>
             <tr id="tableContent">
 
-              <td><button>+</button></td>
-              <td><button>+</button></td>
-              <td><button>+</button></td>
+              <td header="1">
+                
+                <button onclick="createNote(this.parentNode)">+</button>
+              </td>
+              
+              <td header="2">
+                <button>+</button>
+              </td>
+
+              <td header="3">
+                
+                <button>+</button>
+              </td>
 
             </tr>
           </tbody>
