@@ -32,10 +32,32 @@ p::first-letter {
 }
 
 .board {
-  width: 85%;
+  width: 100%;
   text-align: center;
   position: absolute;
+  border: 2px;
 }
+
+table {
+  height: 1px;
+}
+
+th {
+  background-color: #F0D290; 
+  color: white;
+  height: 100%;
+}
+
+#tableContent {
+  height: 100%;
+  border: 2px solid #F0D290;
+}
+
+#tableContent td button{
+  color: red;
+}
+
+
 
 /* NAVBAR */
 
@@ -45,7 +67,7 @@ p::first-letter {
   margin: 0;
   padding: 0;
   overflow: hidden;
-  background-color: #333;
+  background-color: #A3423C;
 }
 
 .navbar li {
@@ -62,9 +84,8 @@ p::first-letter {
 
 /* Change the link color to #111 (black) on hover */
 .navbar li a:hover {
-  background-color: #111;
+  background-color: #DE834D;
 }
-
 
 
 
@@ -77,7 +98,7 @@ p::first-letter {
   z-index: 1;
   top: 0;
   left: 0;
-  background-color: rgb(179, 156, 189);
+  background-color: #781D42;
   overflow-x: hidden;
   padding-top: 20px;
 }
@@ -110,7 +131,7 @@ p::first-letter {
 #mainTable{
   width:100%;
   border-style: solid;
-  border-color: rgb(152, 150, 245);
+  border-color: #F0D290;
   border-collapse: collapse;
 }
 
@@ -123,7 +144,7 @@ p::first-letter {
 .main {
   margin-left: 150px; /* Same as the width of the sidenav */
   font-size: 28px; /* Increased text to enable scrolling */
-  padding: 0px 10px;
+  padding: 0px 0px;
   width: 100%;
   border-collapse: collapse;
 }
@@ -139,4 +160,5 @@ body {
   width:100%;
   margin:0;
   padding:0;
+  background-color: #e5d6b6;
 }

@@ -54,6 +54,10 @@ function getWorkFlows() {
 }
 
 
+function getWorkFlowData($conn, $user, $name) {
+    return "JUST TESTING";
+}
+
 
 //Name, description
 function updateWorkflow(){
@@ -91,12 +95,4 @@ function updateStickyPosition(){
 
 function updateStickySize(){
 
-}
-
-
-if (isset($_REQUEST["option"]) == 4)
-{
-    $conn = get_conection();
-    $email = $_REQUEST["email"];
-    $datos = getWorkFlows($conn, $email);
 }

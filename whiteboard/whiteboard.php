@@ -40,7 +40,7 @@
 
         <?php
             foreach(getWorkFlows()->workflows as $wf) {
-              echo '<button onclick="test(\''.$wf->name.'\')">'.$wf->name.'</button>';
+              echo '<button onclick="getWorkflowData(\''.$wf->name.'\')">'.$wf->name.'</button>';
             } 
         ?>
 
@@ -61,52 +61,27 @@
     
       <div class="board">
     
-        <table id="mainTable" border="2px" cellspacing="5px" cellpadding="15px">
-          <thead style="background-color: rgb(152, 150, 245); color: white">
-            <tr>
-              <th>On hold</th>
-              <th>In progress</th>
-              <th>Needs review</th>
-              <th>Approved</th>
+        <table id="mainTable">
+          <thead>
+            <tr id="tableHeaders">
+              <th>Header 1</th>
+              <th>Header 2</th>
+              <th>Header 3</th>
             </tr>
           </thead>
 
-
           <tbody>
-            <tr>
-              <td width="340" height="700" contenteditable="true"></td>
-              <td width="340" height="700" contenteditable="true"></td>
-              <td width="340" height="700" contenteditable="true"></td>
-              <td width="340" height="700" contenteditable="false">
-                
-                <label for="text"><b>Text <br/>   </b> </label>
-                <input id="text" type="text" />
-                <br></br>
-                <label for="workflowName"><b>Workflow name <br/>  </b> </label>
-                <input id="workflowName" type="text" />
-                <br></br>
-                <label for="state"><b>State <br/>  </b> </label>
-                <input id="state" type="text" />
-                <br></br>
-              <label for="color"><b>Color <br/>  </b> </label>
-                <input id="color" type="text" />
-                <br></br>
-              <label for="size"><b>Size <br/>  </b> </label>
-                <input id="size" type="text" />
-                <br></br>
-                <label for="posX"><b>PosX <br/>  </b> </label>
-                <input id="posX" type="text" />
-                <br></br>
-                <label for="posY"><b>PosY <br/>  </b> </label>
-                <input id="posY" type="text" />
-                <br></br>
-                <button class="buttonRight" onclick="newSticky()">New Sticky</button>
-              </td>
+            <tr id="tableContent">
+
+              <td><button>+</button></td>
+              <td><button>+</button></td>
+              <td><button>+</button></td>
+
             </tr>
           </tbody>
           <tfoot></tfoot>
         </table>
-      <link rel="stylesheet" href="styles.css" />    
+      </div>
     </div>
 
     
