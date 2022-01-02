@@ -71,7 +71,7 @@ function existWorkflow($conn, $user, $name){
 
 //Create new user workflow
 function createWorkflow($conn, $user, $name, $description){
-
+date_default_timezone_set('America/Costa_Rica');
  //Add workflow to user
  $collection = $conn->whiteboard->users;
  $filter = array('email'=>$user);
@@ -129,6 +129,34 @@ function updateWorkflowDescription($conn, $user, $name, $newDescription){
     }
 
 }
+
+
+//get workflow states
+function getStates($conn, $user, $name){
+    $collection = $conn->whiteboard->users;
+    $result = $collection->find(['email' => $user]);
+    $states = NULL;
+    foreach($result as $document){
+      
+        $workflows = $document->workflows;
+
+
+        foreach($workflows as $workflow){
+            
+            if($workflow->name == $name){
+            
+                $states = $workflow->states;  
+
+                
+                
+            }
+        }
+            
+           
+    }
+    return $states;
+}
+
 
 //Check if state already exist on the workflow
 function existState($conn, $user, $name,$state){
