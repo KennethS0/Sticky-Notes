@@ -53,9 +53,10 @@
 
     <div class="main">
 
-    
+      <button class="add-button" onmousedown="addNote('prueba')">Agregar Nota</button>
+
+
       <div class="board">
-        <button class="add-button" onmousedown="addNote()">Agregar Nota</button>
         <table id="mainTable" border="2px" cellspacing="5px" cellpadding="15px">
           <thead style="background-color: rgb(152, 150, 245); color: white">
             <tr>
@@ -69,12 +70,21 @@
 
           <tbody>
             <tr>
-              <td width="340" height="700" contenteditable="true"></td>
-              <td width="340" height="700" contenteditable="true"></td>
-              <td width="340" height="700" contenteditable="true"></td>
+              <td width="340" height="700" contenteditable="true" id="prueba">
+
+                <!-- <button class="add-button" onmousedown="addNote(this.parentNode)">Agregar Nota</button> -->
+              </td>
+              <td width="340" height="700" contenteditable="true">
+
+                <!-- <button class="add-button" onmousedown="addNote(this.parentNode)">Agregar Nota</button> -->
+              </td>
+              <td width="340" height="700" contenteditable="true">
+
+                <!-- <button class="add-button" onmousedown="addNote(this.parentNode)">Agregar Nota</button> -->
+              </td>
               <td width="340" height="700" contenteditable="false">
                 
-              
+                <!-- <button class="add-button" onmousedown="addNote(this.parentNode)">Agregar Nota</button> -->
               </td>
             </tr>
           </tbody>

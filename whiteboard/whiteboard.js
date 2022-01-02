@@ -14,8 +14,11 @@ let notesCount = 0; //Used to give a unique id to each note
 /**
  * addNote creates a new sticky note and adds it to the document.
  */
-function addNote() {
+function addNote(column) {
     console.log('Add button pressed');
+
+    
+    var p = document.getElementById(column).parentNode;
 
     notesCount++;
 
@@ -50,8 +53,9 @@ function addNote() {
 
     note.id = 'note' + notesCount;
 
-    document.body.appendChild(note); //Add the note to the document
+    //document.body.appendChild(note); //Add the note to the document
 
+    p.prepend(note);
     titleInput.focus(); //Set focus to the title of the new note
 }
 
