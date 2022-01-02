@@ -16,12 +16,21 @@ function get_conection(){
     }
     return ($conn);
 }
+function existUser($conn,$user){
+    $collection = $conn->whiteboard->users;
+    $result = $collection->find(['email' => $user]);
+    foreach ($result as $document) {
+        if($document["email"] == $user){
+            return true;
+        }
+    }
+    return false;
+}
 
 // New user register on the database
 function register($conn,$user,$password){
     $collection = $conn->whiteboard->users;
-    $result = $collection->insertOne( [ 'email' => $user, 'password' => $password , 'workflows' => []] );
-    echo "Inserted with Object ID '{$result->getInsertedId()}'";
+    $collection->insertOne( [ 'email' => $user, 'password' => $password , 'workflows' => []] );
 }
 
 // User login

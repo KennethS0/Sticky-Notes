@@ -11,19 +11,32 @@ function notificar(msg) {
 }
 
 function register() {
-  email = document.getElementById("email").value;
+  email = document.getElementById("user").value;
   password = document.getElementById("password").value;
 
   var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function () {
+    if (this.readyState == 4 && this.status == 200) {
+      respuesta = eval("(" + xhttp.responseText + ")");
+      console.log(respuesta);
+      if (respuesta[0] == false) {
+        alert(JSON.stringify(respuesta[1]));
+      } else {
+        alert(JSON.stringify(respuesta[1]));
+      }
+    }
+  };
   xhttp.open("POST", "register.php", false);
   var formData = new FormData();
-  formData.append("email", email);
-  formData.append("password", password);
+  if (email != "" && password != "") {
+    formData.append("email", email);
+    formData.append("password", password);
+  }
   xhttp.send(formData);
 }
 
 function login() {
-  email = document.getElementById("email").value;
+  email = document.getElementById("user").value;
   password = document.getElementById("password").value;
 
   var xhttp = new XMLHttpRequest();
@@ -32,9 +45,9 @@ function login() {
       respuesta = eval("(" + xhttp.responseText + ")");
 
       if (respuesta[0] == false) {
-        alert("Error: Las credenciales del usuario no son válidas.");
+        alert(JSON.stringify(respuesta[1]));
       } else {
-        window.location.href = "whiteboard.html";
+        window.location.href = "whiteboard.php";
       }
     }
   };
