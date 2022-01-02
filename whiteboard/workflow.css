@@ -58,7 +58,6 @@ th {
 
 /* COLUMNS AND STICKY NOTES */
 .sticky-area {
-    background-color: #333;
     padding: 1rem;
 }
 
@@ -67,11 +66,14 @@ th {
 }
 
 .sticky-note {
-    
+    padding: 10px;
+    margin: 3px;
+    background-color: yellow;
+    resize: both;
+    overflow: auto;
 }
 
 .draggable { 
-    background-color: white;
     cursor: move;
 }
 

@@ -95,12 +95,10 @@ function createNewNote(stickyArea) {
 
     // Adds the events for dragging
     stickyNote.addEventListener('dragstart', () => {
-        console.log("Dragging");
         stickyNote.classList.add('dragging');
     });
 
     stickyNote.addEventListener('dragend', () => {
-        console.log("Stopped dragging");
         stickyNote.classList.remove('dragging');
     });
 
@@ -108,7 +106,7 @@ function createNewNote(stickyArea) {
     stickyArea.append(stickyNote);
 }
 
-
+// Adds the note in the corresponding area
 function positionElement(stickyArea, posY) {
     const draggables = [...stickyArea.querySelectorAll('.draggable:not(.dragging)')];
 
