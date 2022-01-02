@@ -567,12 +567,3 @@ function getStickies($conn,$user,$name,$state){
     }
     return $stickiesArray;
 }
-
-
-
-if (isset($_REQUEST["option"]) == 4)
-{
-    $conn = get_conection();
-    $email = $_REQUEST["email"];
-    $datos = getWorkFlows($conn, $email);
-}

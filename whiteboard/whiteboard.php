@@ -11,100 +11,89 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Whiteboard</title>
-    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="workflow.css" />
     <script src="script.js"></script>
   </head>
   <body>
-    
-    
-    <div class="sidenav">
-      <p>Username</p>
-      <button>Log out</button>
-      <hr>
-
-      <form action="whiteboard.php">
-        <label for="name"><b>Name <br/>   </b> </label>
-        <input id="name" type="text" minlength="5" required>
-        <br></br>
-        <label for="description"><b>Description <br/>  </b> </label>
-        <input id="description" type="text" required>
-        <br></br>
-        <button class="buttonRight" onclick="newWorkflow()">New Workflow</button>
-        <br></br>
-      </form>
-     
       
-      <hr>
-      
-      <div id="boards_area">
+    <!-- Navbar -->
+    <nav>
+      <ul class="menu">
+        <li>Username</li>
+        <li>Workflows:
+          <select name="workflows" id="workflowsCombo">
+            <?php
+              foreach(getWorkFlows()->workflows as $wf) {
+                echo '<option value="'.$wf->name.'">'.$wf->name.'</option>'; 
+              }
+            ?>
+          </select>
 
-        <?php
-            foreach(getWorkFlows()->workflows as $wf) {
-              echo '<button onclick="getWorkflowData(\''.$wf->name.'\')">'.$wf->name.'</button>';
-            } 
-        ?>
+        </li>
+        <li><button>Load</button></li>
+        <li><button>Delete</button></li>
 
+        <li>Create: <input type="text" name="new_wf_name" id="new_wf"></li>
+        <li><button>Create</button></li>
+      </ul>
+    </nav>
+
+    <!-- Main content of the page -->
+    <div class="content">
+
+      <div class="current-workflow">
+        <h1>Current Workflow</h1>
+        <p>Workflow description</p>
       </div>
-    </div>
 
-    <div class="main">
-        <!-- Navbar -->
-        <div class="navbar">
-            <ul>
-              <li><a href="#">Test</a></li>
-              <li><a href="#">Test2</a></li>
-              <li><a href="#">Test3</a></li>
-              <li><a href="#">Test4</a></li>
-            </ul>
-
-        </div>
-    
-      <div class="board">
-    
-        <table id="mainTable">
+      <div class="workflow">
+        <!-- Workflow -->
+        <table style=" table-layout: fixed">
+          
           <thead>
-            <tr id="tableHeaders">
-              <th header="1">Header 1</th>
-              <th header="2">Header 2</th>
-              <th header="3">Header 3</th>
+            <tr id="head-row">
+              <th> 
+                  <div contentEditable="true" class="header"> Inicio </div> 
+                  <button onclick="deleteColumn(this.parentElement)">X</button>
+                </th>
+              <th> 
+                  <div contentEditable="true" class="header"> En progreso </div>
+                  <button onclick="deleteColumn(this.parentElement)">X</button></th>
+              <th>
+              <div contentEditable="true" class="header"> Finalizado </div>
+                <button onclick="deleteColumn(this.parentElement)">X</button>
+              </th>
             </tr>
           </thead>
-
+          
           <tbody>
-            <tr id="tableContent">
+            <tr id="body-row">
+              <td>
+                <div class="sticky-area">
 
-              <td header="1">
-                
-                <button onclick="createNote(this.parentNode)">+</button>
+                </div>
+                <button onclick="createNewNote()">Add Note</button>
               </td>
-              
-              <label for="text"><b>Text <br/>   </b> </label>
-              <input id="text" type="text" />
-              <br></br>
-              <label for="workflowName"><b>Workflow name <br/>  </b> </label>
-              <input id="workflowName" type="text" />
-              <br></br>
-              <label for="state"><b>State <br/>  </b> </label>
-              <input id="state" type="text" />
-              <br></br>
-             <label for="color"><b>Color <br/>  </b> </label>
-              <input id="color" type="text" />
-              <br></br>
-             <label for="size"><b>Size <br/>  </b> </label>
-              <input id="size" type="text" />
-              <br></br>
-              <br></br>
-              <button class="buttonRight" onclick="newSticky()">New Sticky</button>
-            </td>
-          </tr>
-        </tbody>
-        <tfoot></tfoot>
-      </table>
-    <link rel="stylesheet" href="styles.css" />    
+              <td>
+                <div class="sticky-area">
+
+                </div>
+                <button onclick="createNewNote()">Add Note</button>
+              </td>
+              <td>
+              <div class="sticky-area">
+
+              </div>
+              <button onclick="createNewNote()">Add Note</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <button class="addColumnButton" onclick="addNewColumn()">+</button>
+      </div>
+
     </div>
-
-    
-
   </body>
 
   <script src="whiteboard.js"></script>

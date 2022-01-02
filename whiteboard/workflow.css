@@ -1,0 +1,66 @@
+/* General styles */
+body {
+    margin: 0;
+}
+
+.content {
+    padding-top: 37px;
+}
+
+.current-workflow {
+    position: relative;
+}
+
+.workflow {
+    display: flex;
+}
+
+.addColumnButton {
+    min-width: 50px;
+}
+
+/* NAVIGATION BAR */
+nav {
+    width: 100%;
+    float: left;
+    box-shadow: 0 2px 4px 0 rgba(0,0,0,.2);
+    position: fixed;
+}
+
+.menu { 
+    margin: 0;
+    padding: 8px;
+    height: 21px;
+    background-color: rgb(140, 230, 226);
+}
+
+.menu li {
+    display: inline;
+}
+
+/* Table */
+table, th, td {
+    border-collapse: collapse;
+    border: 2px solid rgb(111, 155, 184);
+    height: 100%;
+}
+
+th, td {
+    min-width: 300px;
+}
+
+th {
+    background-color: rgb(111, 155, 184);
+    height: 30px;
+    color: white;
+    box-shadow: 0 2px 4px 0 rgba(0,0,0,.2);
+}
+
+/* Columns */
+.sticky-area {
+
+}
+
+#body-row td button {
+    width: 100%;
+}
