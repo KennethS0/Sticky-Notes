@@ -101,7 +101,17 @@ function createNewNote(stickyArea) {
     var deleteButton = document.createElement("button");
     deleteButton.append(document.createTextNode("Delete"));
     deleteButton.addEventListener("click", (e) => {
-        stickyNote.remove();
+        var steps = 0;
+        var timer = setInterval(function () {
+            steps++;
+            stickyNote.style.opacity -= 0.05 * steps;
+            if (steps >= 20) {
+                clearInterval(timer);
+                timer = undefined;
+                stickyNote.remove();
+            }
+        }, 13);
+        
     });
     stickyNote.append(deleteButton);
 
