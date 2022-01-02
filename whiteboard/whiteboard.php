@@ -33,7 +33,8 @@
         <li><button>Load</button></li>
         <li><button>Delete</button></li>
 
-        <li>Create: <input type="text" name="new_wf_name" id="new_wf"></li>
+        <li>Create: <input placeholder="Name" type="text" name="new_wf_name" id="new_wf_na"></li>
+        <li><input placeholder="Description" type="text" name="new_wf_description" id="new_wf_desc"></li>
         <li><button>Create</button></li>
       </ul>
     </nav>
