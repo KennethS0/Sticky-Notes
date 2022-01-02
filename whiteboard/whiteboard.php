@@ -78,20 +78,29 @@
                 <button onclick="createNote(this.parentNode)">+</button>
               </td>
               
-              <td header="2">
-                <button>+</button>
-              </td>
-
-              <td header="3">
-                
-                <button>+</button>
-              </td>
-
-            </tr>
-          </tbody>
-          <tfoot></tfoot>
-        </table>
-      </div>
+              <label for="text"><b>Text <br/>   </b> </label>
+              <input id="text" type="text" />
+              <br></br>
+              <label for="workflowName"><b>Workflow name <br/>  </b> </label>
+              <input id="workflowName" type="text" />
+              <br></br>
+              <label for="state"><b>State <br/>  </b> </label>
+              <input id="state" type="text" />
+              <br></br>
+             <label for="color"><b>Color <br/>  </b> </label>
+              <input id="color" type="text" />
+              <br></br>
+             <label for="size"><b>Size <br/>  </b> </label>
+              <input id="size" type="text" />
+              <br></br>
+              <br></br>
+              <button class="buttonRight" onclick="newSticky()">New Sticky</button>
+            </td>
+          </tr>
+        </tbody>
+        <tfoot></tfoot>
+      </table>
+    <link rel="stylesheet" href="styles.css" />    
     </div>
 
     

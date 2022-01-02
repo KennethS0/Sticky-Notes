@@ -25,7 +25,7 @@ function register() {
 function login() {
   email = document.getElementById("email").value;
   password = document.getElementById("password").value;
-  console.log("Entra");
+
   var xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function () {
     if (this.readyState == 4 && this.status == 200) {
@@ -49,6 +49,15 @@ function newWorkflow() {
   workflowName = document.getElementById("name").value;
   description = document.getElementById("description").value;
   var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function () {
+    if (this.readyState == 4 && this.status == 200) {
+      respuesta = eval("(" + xhttp.responseText + ")");
+
+      if (respuesta[0] == false) {
+        alert(JSON.stringify(respuesta[1]));
+      }
+    }
+  };
   xhttp.open("POST", "workflow.php", false);
   var formData = new FormData();
   formData.append("option", 1);
@@ -58,19 +67,23 @@ function newWorkflow() {
   xhttp.send(formData);
 }
 
-
-
-
 function newSticky() {
   text = document.getElementById("text").value;
   workflowName = document.getElementById("workflowName").value;
   state = document.getElementById("state").value;
   color = document.getElementById("color").value;
   size = document.getElementById("size").value;
-  posX = document.getElementById("posX").value;
-  posY = document.getElementById("posY").value;
 
   var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function () {
+    if (this.readyState == 4 && this.status == 200) {
+      respuesta = eval("(" + xhttp.responseText + ")");
+
+      if (respuesta[0] == false) {
+        alert(JSON.stringify(respuesta[1]));
+      }
+    }
+  };
   xhttp.open("POST", "sticky.php", false);
   var formData = new FormData();
   formData.append("option", 1);
@@ -80,7 +93,5 @@ function newSticky() {
   formData.append("state", state);
   formData.append("color", color);
   formData.append("size", size);
-  formData.append("posX", posX);
-  formData.append("posY", posY);
   xhttp.send(formData);
 }
