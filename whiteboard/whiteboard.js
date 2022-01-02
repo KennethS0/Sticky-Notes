@@ -114,8 +114,22 @@ function createNewNote(stickyArea) {
         stickyNote.classList.remove('dragging');
     });
 
+    // Changes the visibility of the note
+    stickyNote.style.opacity = 0;
+
     // Adds the note to the stickyArea
     stickyArea.append(stickyNote);
+
+    // Slowly fades in the sticky note
+    var steps = 0;
+    var timer = setInterval(function () {
+        steps++;
+        stickyNote.style.opacity = 0.05 * steps;
+        if (steps >= 20) {
+            clearInterval(timer);
+            timer = undefined;
+        }
+    }, 8);
 }
 
 // Adds the note in the corresponding area
