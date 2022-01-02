@@ -56,11 +56,25 @@ th {
     box-shadow: 0 2px 4px 0 rgba(0,0,0,.2);
 }
 
-/* Columns */
+/* COLUMNS AND STICKY NOTES */
 .sticky-area {
-
+    background-color: #333;
+    padding: 1rem;
 }
 
 #body-row td button {
     width: 100%;
+}
+
+.sticky-note {
+    
+}
+
+.draggable { 
+    background-color: white;
+    cursor: move;
+}
+
+.draggable.dragging {
+    opacity: .5;
 }

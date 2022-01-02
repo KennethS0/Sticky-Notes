@@ -53,40 +53,13 @@
           
           <thead>
             <tr id="head-row">
-              <th> 
-                  <div contentEditable="true" class="header"> Inicio </div> 
-                  <button onclick="deleteColumn(this.parentElement)">X</button>
-                </th>
-              <th> 
-                  <div contentEditable="true" class="header"> En progreso </div>
-                  <button onclick="deleteColumn(this.parentElement)">X</button></th>
-              <th>
-              <div contentEditable="true" class="header"> Finalizado </div>
-                <button onclick="deleteColumn(this.parentElement)">X</button>
-              </th>
+              
             </tr>
           </thead>
           
           <tbody>
             <tr id="body-row">
-              <td>
-                <div class="sticky-area">
-
-                </div>
-                <button onclick="createNewNote()">Add Note</button>
-              </td>
-              <td>
-                <div class="sticky-area">
-
-                </div>
-                <button onclick="createNewNote()">Add Note</button>
-              </td>
-              <td>
-              <div class="sticky-area">
-
-              </div>
-              <button onclick="createNewNote()">Add Note</button>
-              </td>
+              
             </tr>
           </tbody>
         </table>
