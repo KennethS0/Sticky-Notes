@@ -93,6 +93,22 @@ function createNewNote(stickyArea) {
     stickyNote.append(textArea);
     i++;
 
+    // Creates the color changing input
+    var colorPicker = document.createElement("input");
+    colorPicker.setAttribute("type", "color");
+    colorPicker.addEventListener("change", (e) => {
+        stickyNote.style.backgroundColor = e.target.value;
+    });
+    stickyNote.append(colorPicker);
+
+    // Creates the delete button
+    var deleteButton = document.createElement("button");
+    deleteButton.append(document.createTextNode("Delete"));
+    deleteButton.addEventListener("click", (e) => {
+        stickyNote.remove();
+    });
+    stickyNote.append(deleteButton);
+
     // Adds the events for dragging
     stickyNote.addEventListener('dragstart', () => {
         stickyNote.classList.add('dragging');

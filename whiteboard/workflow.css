@@ -71,6 +71,7 @@ th {
     background-color: yellow;
     resize: both;
     overflow: auto;
+    display: flex;
 }
 
 .draggable { 
