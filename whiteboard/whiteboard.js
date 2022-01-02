@@ -73,10 +73,6 @@ function deleteColumn(columnHeader) {
     headers.removeChild(headers.children[index]);
 }
 
-
-// Variable de prueba
-var i = 0;
-
 // Function to create new notes in a specific area
 function createNewNote(stickyArea) {
 
@@ -89,10 +85,10 @@ function createNewNote(stickyArea) {
 
     // Adds the text area
     var textArea = document.createElement("p");
-    textArea.append(document.createTextNode("TEST DATA" + i));
+    textArea.append(document.createTextNode("New note!"));
+    textArea.setAttribute("contentEditable", "true");
     stickyNote.append(textArea);
-    i++;
-
+    
     // Creates the color changing input
     var colorPicker = document.createElement("input");
     colorPicker.setAttribute("type", "color");

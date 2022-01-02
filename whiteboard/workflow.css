@@ -71,7 +71,23 @@ th {
     background-color: yellow;
     resize: both;
     overflow: auto;
+
     display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.sticky-note p {
+    width: 100%;
+    cursor: text;
+}
+
+.sticky-note * {
+    display: inline-block;
+}
+
+.sticky-note *:not(:first-child) {
+    flex: 1;
 }
 
 .draggable { 
