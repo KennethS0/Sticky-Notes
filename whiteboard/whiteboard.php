@@ -70,5 +70,6 @@
     </div>
   </body>
 
+  <script src="speech.js"></script>
   <script src="whiteboard.js"></script>
 </html>

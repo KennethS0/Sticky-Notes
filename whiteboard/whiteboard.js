@@ -27,6 +27,17 @@ function addNewColumn() {
     }
     header.append(deleteButton);
 
+    // Adds a listen button for TTS
+    var speech = document.createElement("button");
+    speech.append(document.createTextNode("Listen"));
+    speech.addEventListener('click', (e) => {
+        const text = editableContent.textContent;
+
+        // Function in "speech.js"
+        speak(text);
+    });
+    header.append(speech);
+
     // Adds a new body column
     var data = document.createElement("td");
 
@@ -75,9 +86,8 @@ function deleteColumn(columnHeader) {
 
 // Function to create new notes in a specific area
 function createNewNote(stickyArea) {
-
     var stickyNote = document.createElement("div");
-    
+
     // Adds all the corresponing classes to the note
     stickyNote.classList.add("draggable");
     stickyNote.classList.add("sticky-note");
@@ -96,6 +106,17 @@ function createNewNote(stickyArea) {
         stickyNote.style.backgroundColor = e.target.value;
     });
     stickyNote.append(colorPicker);
+
+    // Creates speech button
+    var speech = document.createElement("button");
+    speech.append(document.createTextNode("Listen"));
+    speech.addEventListener("click", (e) => {
+        const text = textArea.textContent;
+
+        // Function in "speech.js"
+        speak(text);
+    });
+    stickyNote.append(speech);
 
     // Creates the delete button
     var deleteButton = document.createElement("button");
@@ -122,7 +143,8 @@ function createNewNote(stickyArea) {
 
     stickyNote.addEventListener('dragend', () => {
         stickyNote.classList.remove('dragging');
-    });
+    });    
+
 
     // Changes the visibility of the note
     stickyNote.style.opacity = 0;
