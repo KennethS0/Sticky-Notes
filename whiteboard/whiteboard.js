@@ -13,10 +13,22 @@ function addNewColumn() {
     editableContent.classList.add("header");
     editableContent.append(document.createTextNode("New column"));
     editableContent.setAttribute("contentEditable", "true");
-    editableContent.addEventListener("input", function() {
-        // Aqui se impreme cuando se edita todo
-        console.log(editableContent.innerHTML);
+
+    var timer;
+    editableContent.addEventListener("keyup", function(event) {
+        clearTimeout(timer);
+        if (event) {
+            timer = setTimeout( () => {
+                
+                // Conexion al backend para actualizar header
+                const index = [...headers.children].indexOf(header);
+                
+
+            },
+            3000);
+        }        
     });
+
     header.append(editableContent);
 
     // Adds a delete button along
@@ -163,6 +175,14 @@ function createNewNote(stickyArea) {
         }
     }, 8);
 }
+
+// Loads the workflow
+function loadWorkflow() {
+    const selectedWorkflow = document.getElementById("workflowsCombo").index;
+    console.log(selectedWorkflow);
+
+}
+
 
 // Adds the note in the corresponding area
 function positionElement(stickyArea, posY) {

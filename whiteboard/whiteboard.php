@@ -12,7 +12,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Whiteboard</title>
     <link rel="stylesheet" href="workflow.css" />
-    <script src="script.js"></script>
+    
   </head>
   <body>
       
@@ -30,12 +30,12 @@
           </select>
 
         </li>
-        <li><button>Load</button></li>
+        <li><button onclick="loadWorkflow()">Load</button></li>
         <li><button>Delete</button></li>
 
-        <li>Create: <input placeholder="Name" type="text" name="new_wf_name" id="new_wf_na"></li>
-        <li><input placeholder="Description" type="text" name="new_wf_description" id="new_wf_desc"></li>
-        <li><button>Create</button></li>
+        <li>Create: <input placeholder="Name" type="text" name="new_wf_name" id="name"></li>
+        <li><input placeholder="Description" type="text" name="new_wf_description" id="description"></li>
+        <li><button onclick="newWorkflow()">Create</button></li>
       </ul>
     </nav>
 
@@ -72,4 +72,5 @@
 
   <script src="speech.js"></script>
   <script src="whiteboard.js"></script>
+  <script src="script.js"></script>
 </html>
