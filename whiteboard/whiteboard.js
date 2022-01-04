@@ -187,7 +187,12 @@ function loadWorkflow() {
     document.getElementById("body-row").innerHTML = "";
 
     var user = "lisethGonz6"
-    loadStates(user,selectedWorkflow);
+    var states = loadStates(user,selectedWorkflow);
+
+    console.log(states);
+    // states.forEach(element => {
+    //     addNewColumn(element["name"]);
+    // });
 
 
 

@@ -115,12 +115,9 @@ function loadStates(email, workflowName) {
   var xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function () {
     if (this.readyState == 4 && this.status == 200) {
-      respuesta = eval("(" + xhttp.responseText + ")");
-      console.log(respuesta);
-
-      if (respuesta[0] == false) {
-        alert(JSON.stringify(respuesta[1]));
-      }
+      //respuesta = eval("(" + xhttp.responseText + ")");
+      var respuesta = JSON.parse(JSON.stringify(xhttp.responseText));
+      return respuesta;
     }
   };
   xhttp.open("POST", "workflow.php", false);
