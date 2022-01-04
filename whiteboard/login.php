@@ -22,12 +22,13 @@ $conn = get_conection();
 $result = login($conn,$email,$password);
 
 
-if($result== true){
-    echo "[true,{'email':'$email'}]";
+if($result != true){
+    echo "[false,{'Error':'Las credenciales del usuario no son válidas'}]";
+    
 }
 else
 {
-    echo "[false,{'Error':'Las credenciales del usuario no son válidas'}]";
+    echo "[true,{'email':'$email'}]";
 }
 
 ?>

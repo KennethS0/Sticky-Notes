@@ -16,12 +16,21 @@ function get_conection(){
     }
     return ($conn);
 }
+function existUser($conn,$user){
+    $collection = $conn->whiteboard->users;
+    $result = $collection->find(['email' => $user]);
+    foreach ($result as $document) {
+        if($document["email"] == $user){
+            return true;
+        }
+    }
+    return false;
+}
 
 // New user register on the database
 function register($conn,$user,$password){
     $collection = $conn->whiteboard->users;
-    $result = $collection->insertOne( [ 'email' => $user, 'password' => $password , 'workflows' => []] );
-    echo "Inserted with Object ID '{$result->getInsertedId()}'";
+    $collection->insertOne( [ 'email' => $user, 'password' => $password , 'workflows' => []] );
 }
 
 // User login
@@ -62,7 +71,7 @@ function existWorkflow($conn, $user, $name){
 
 //Create new user workflow
 function createWorkflow($conn, $user, $name, $description){
-
+date_default_timezone_set('America/Costa_Rica');
  //Add workflow to user
  $collection = $conn->whiteboard->users;
  $filter = array('email'=>$user);
@@ -120,6 +129,34 @@ function updateWorkflowDescription($conn, $user, $name, $newDescription){
     }
 
 }
+
+
+//get workflow states
+function getStates($conn, $user, $name){
+    $collection = $conn->whiteboard->users;
+    $result = $collection->find(['email' => $user]);
+    $states = NULL;
+    foreach($result as $document){
+      
+        $workflows = $document->workflows;
+
+
+        foreach($workflows as $workflow){
+            
+            if($workflow->name == $name){
+            
+                $states = $workflow->states;  
+
+                
+                
+            }
+        }
+            
+           
+    }
+    return $states;
+}
+
 
 //Check if state already exist on the workflow
 function existState($conn, $user, $name,$state){
