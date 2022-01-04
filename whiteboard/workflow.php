@@ -40,6 +40,7 @@ if (isset($_REQUEST["option"]) == 2)
     //Update description action = 2
     //Add state action = 3
     //Delete state action = 4
+    //Load states = 5
 
     if(isset($_REQUEST["action"]) == 1){
 
@@ -70,7 +71,13 @@ if (isset($_REQUEST["option"]) == 2)
         }else{
             deleteState($conn, $email, $name,$state);
         }
+    }elseif(isset($_REQUEST["action"]) == 5){
+
+        $statesList = getStates($conn, $email, $name);
+        echo ("[true,{$statesList}]");
+            exit();
     }
+
    
     
 }

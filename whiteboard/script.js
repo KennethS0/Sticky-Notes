@@ -108,3 +108,26 @@ function newSticky() {
   formData.append("size", size);
   xhttp.send(formData);
 }
+
+
+function loadStates(email, workflowName) {
+
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function () {
+    if (this.readyState == 4 && this.status == 200) {
+      respuesta = eval("(" + xhttp.responseText + ")");
+      console.log(respuesta);
+
+      if (respuesta[0] == false) {
+        alert(JSON.stringify(respuesta[1]));
+      }
+    }
+  };
+  xhttp.open("POST", "workflow.php", false);
+  var formData = new FormData();
+  formData.append("option", 2);
+  formData.append("action", 5);
+  formData.append("email", email);
+  formData.append("name", workflowName);
+  xhttp.send(formData);
+}

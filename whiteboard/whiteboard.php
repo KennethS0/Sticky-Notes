@@ -64,7 +64,7 @@
           </tbody>
         </table>
 
-        <button class="addColumnButton" onclick="addNewColumn()">+</button>
+        <button class="addColumnButton" onclick="addNewColumn('New Column')">+</button>
       </div>
 
     </div>

@@ -75,7 +75,7 @@ date_default_timezone_set('America/Costa_Rica');
  //Add workflow to user
  $collection = $conn->whiteboard->users;
  $filter = array('email'=>$user);
- $update = array('$push'=>array('workflows'=>[ 'name' => $name, 'creation_date' => date("d/m/Y H:i:s"),'description'=> $description ,'states' => ['Sin iniciar','Iniciado','Finalizado'],'stickies' => []]));   
+ $update = array('$push'=>array('workflows'=>[ 'name' => $name, 'creation_date' => date("d/m/Y H:i:s"),'description'=> $description ,'states' => ['Iniciado' =>[], 'Sin iniciar' => [], 'Finalizado' => []]]));   
  $collection->updateOne($filter, $update);
 
 }

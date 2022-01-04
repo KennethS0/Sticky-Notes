@@ -29,7 +29,8 @@ if (isset($_REQUEST["option"]) == 1)
     else{
         createSticky($conn,$email,$name,$text,$state,$color,$size);
     }
-                
+    
+    
     
 }
 
