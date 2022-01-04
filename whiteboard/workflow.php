@@ -84,7 +84,8 @@ if ($option == 2)
 
         for($i=0; $i<$statesList->count();$i++)
         {
-            $jsonResponse .= "{'name':". $statesList[$i]->name."}";
+            $jsonResponse .= '{"name":"'.$statesList[$i]->name.'"}';
+
             if($i!=$statesList->count()-1)
             {
                 $jsonResponse .= ",";
@@ -92,12 +93,9 @@ if ($option == 2)
         }
         $jsonResponse .= "]";
 
-        print_r($jsonResponse);
+        echo ($jsonResponse);
         exit();
     }
-
-   
-    
 }
 
 if (isset($_REQUEST["option"]) == 3)

@@ -155,6 +155,8 @@ function createNewNote(stickyArea) {
 
     stickyNote.addEventListener('dragend', () => {
         stickyNote.classList.remove('dragging');
+
+        // TODO - Update backend
     });    
 
 
@@ -187,15 +189,7 @@ function loadWorkflow() {
     document.getElementById("body-row").innerHTML = "";
 
     var user = "lisethGonz6"
-    var states = loadStates(user,selectedWorkflow);
-
-    console.log(states);
-    // states.forEach(element => {
-    //     addNewColumn(element["name"]);
-    // });
-
-
-
+    loadStates(user,selectedWorkflow);
 }
 
 // Creation of new columns
