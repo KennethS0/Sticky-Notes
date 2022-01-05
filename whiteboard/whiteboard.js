@@ -38,7 +38,7 @@ function createNewNote(stickyArea,{text,color,height,width}) {
             timer = setTimeout( () => {
                 console.log("Editado");    
             },
-            7000);
+            3000);
         }        
         // Updates the backend 
         updateWFStates();
