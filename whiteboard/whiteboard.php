@@ -36,6 +36,7 @@
         <li>Create: <input placeholder="Name" type="text" name="new_wf_name" id="name"></li>
         <li><input placeholder="Description" type="text" name="new_wf_description" id="description"></li>
         <li><button onclick="newWorkflow()">Create</button></li>
+        <li><button onclick="updateWFStates()">Prueba</button></li>
       </ul>
     </nav>
 
@@ -43,8 +44,8 @@
     <div class="content">
 
       <div class="current-workflow">
-        <h1>Current Workflow</h1>
-        <p>Workflow description</p>
+        <h1 id="workflowName">Current Workflow</h1>
+        <p id="workflowDescription">Workflow description</p>
       </div>
 
       <div class="workflow">

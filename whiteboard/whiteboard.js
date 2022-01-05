@@ -1,87 +1,3 @@
-// Creation of new columns
-function addNewColumn() {
-    // Obtains the important rows
-    const headers = document.getElementById("head-row");
-    const body = document.getElementById("body-row");
-
-    // Adds a new header
-    var header = document.createElement("th");
-    headers.append(header);
-
-    // Adds editable content to the header
-    var editableContent = document.createElement("div");
-    editableContent.classList.add("header");
-    editableContent.append(document.createTextNode("New column"));
-    editableContent.setAttribute("contentEditable", "true");
-
-    var timer;
-    editableContent.addEventListener("keyup", function(event) {
-        clearTimeout(timer);
-        if (event) {
-            timer = setTimeout( () => {
-                
-                // Conexion al backend para actualizar header
-                const index = [...headers.children].indexOf(header);
-                
-
-            },
-            3000);
-        }        
-    });
-
-    header.append(editableContent);
-
-    // Adds a delete button along
-    var deleteButton = document.createElement("button");
-    deleteButton.append(document.createTextNode("X"));
-    deleteButton.onclick = function(event) {
-        deleteColumn(header);
-    }
-    header.append(deleteButton);
-
-    // Adds a listen button for TTS
-    var speech = document.createElement("button");
-    speech.append(document.createTextNode("Listen"));
-    speech.addEventListener('click', (e) => {
-        const text = editableContent.textContent;
-
-        // Function in "speech.js"
-        speak(text);
-    });
-    header.append(speech);
-
-    // Adds a new body column
-    var data = document.createElement("td");
-
-    // Adds the sticky note area to the column
-    var stickyArea = document.createElement("div");
-    stickyArea.classList.add('sticky-area');
-
-    // Adds the corresponding event to the sticky area
-    stickyArea.addEventListener('dragover', e => {
-        e.preventDefault();
-        const itemPos = positionElement(stickyArea, e.clientY);
-        const draggable = document.querySelector('.dragging');
-        if (itemPos != null) {
-            stickyArea.insertBefore(draggable, itemPos);
-        } else {
-            stickyArea.appendChild(draggable);
-        }
-    });
-
-    data.append(stickyArea);
-
-    // Adds the add new note button to the column
-    var addNoteButton = document.createElement("button");
-    addNoteButton.append(document.createTextNode("Add Note"));
-    addNoteButton.onclick = function(event) {
-        createNewNote(stickyArea);
-    }
-    data.append(addNoteButton);
-
-    body.append(data);
-}
-
 // Deletes columns along with its notes
 function deleteColumn(columnHeader) {
     // Obtains the index of the column
@@ -97,9 +13,13 @@ function deleteColumn(columnHeader) {
 }
 
 // Function to create new notes in a specific area
-function createNewNote(stickyArea) {
+function createNewNote(stickyArea,{text,color,height,width}) {
     var stickyNote = document.createElement("div");
 
+    stickyNote.style.backgroundColor = color;
+    stickyNote.style.height = height;
+    stickyNote.style.width = width;
+    
     // Adds all the corresponing classes to the note
     stickyNote.classList.add("draggable");
     stickyNote.classList.add("sticky-note");
@@ -107,7 +27,7 @@ function createNewNote(stickyArea) {
 
     // Adds the text area
     var textArea = document.createElement("p");
-    textArea.append(document.createTextNode("New note!"));
+    textArea.append(document.createTextNode(text));
     textArea.setAttribute("contentEditable", "true");
     stickyNote.append(textArea);
     
@@ -269,7 +189,7 @@ function addNewColumn(name) {
     var addNoteButton = document.createElement("button");
     addNoteButton.append(document.createTextNode("Add Note"));
     addNoteButton.onclick = function(event) {
-        createNewNote(stickyArea);
+        createNewNote(stickyArea,{'color' : '#FFFF00','text' : 'New Sticky!!','height' : '97px','width' : '262px'});
     }
     data.append(addNoteButton);
 
@@ -290,4 +210,11 @@ function positionElement(stickyArea, posY) {
             return closest;
         }
     }, { offset: Number.NEGATIVE_INFINITY}).element;
+}
+
+// Adds the note in the corresponding area
+function updatePos(stickyArea, posY) {
+
+    let stikies = document.getElementsByClassName('sticky-area').children;
+    console.log(stikies);
 }

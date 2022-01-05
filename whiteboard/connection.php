@@ -604,3 +604,42 @@ function getStickies($conn,$user,$name,$state){
     }
     return $stickiesArray;
 }
+
+
+//Change the position of a specific sticky
+function updateWFStates($conn,$user,$states,$wtIndex){
+    $collection = $conn->whiteboard->users;
+    $result = $collection->find(['email' => $user]);
+    foreach($result as $document){
+      
+        $workflows = $document->workflows;
+
+        $selectedWF[wfIndex]->updateOne;
+
+        foreach($workflows as $workflow){
+            
+            if($workflow->name == $name){
+                $stickies = $workflow->stickies;  
+                foreach($stickies as $sticky){
+                    if($sticky->text == $text){
+                        if(positionAvailable($stickies,$sticky->state,$position)){
+                            $sticky->position = $position;
+                        }
+                        else{
+                           updateStickiesPosition($stickies,$sticky->state,$position);
+                        }
+                        $sticky->position = $position;
+                    }
+                }            
+              
+                $workflow->stickies= $stickies;
+                $filter = array('email'=>$user);
+                $update = array('$set'=>array('workflows'=>$workflows));   
+                $collection->updateOne($filter,$update);
+         
+            }
+        }
+            
+           
+    }
+}

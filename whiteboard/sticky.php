@@ -15,12 +15,13 @@ if(!isset($_REQUEST["text"]))
 $email=$_REQUEST["email"];
 $text=$_REQUEST["text"];
 $name=$_REQUEST["name"];
-$state = $_REQUEST["state"];
 $color=$_REQUEST["color"];
-$size = $_REQUEST["size"];
+$position = $_REQUEST["position"];
 $conn = get_conection();
 
-if (isset($_REQUEST["option"]) == 1)
+$option = $_REQUEST["option"];
+
+if ($option == 1)
 {   
     if(existSticky($conn,$email,$name,$text)){
         echo ("[false,{'Error':'El sticky ya existe en el workflow'}]");
@@ -29,11 +30,13 @@ if (isset($_REQUEST["option"]) == 1)
     else{
         createSticky($conn,$email,$name,$text,$state,$color,$size);
     }
-    
-    
-    
+
 }
+if($option == 2)
+{
 
+   updateStickyPos($conn,$email,$name,$stickies);
 
+}
 
 ?>

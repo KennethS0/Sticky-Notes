@@ -45,6 +45,7 @@ if ($option == 2)
     //Add state action = 3
     //Delete state action = 4
     //Load states = 5
+    //Update workflow = 6
     
     $action = $_REQUEST["action"];
 
@@ -96,9 +97,17 @@ if ($option == 2)
         echo ($jsonResponse);
         exit();
     }
-}
 
-if (isset($_REQUEST["option"]) == 3)
+}elseif($action == 6){
+
+    $states=$_REQUEST["states"];
+    $wfIndex=$_REQUEST["wfIndex"];
+    updateWFStates($conn,$email,$states,$wfIndex);
+
+    echo ($jsonResponse);
+    exit();
+}
+if ($option== 3)
 {
     deleteWorkflow($conn,$name,$description);
     

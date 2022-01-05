@@ -109,7 +109,7 @@ function newSticky() {
   xhttp.send(formData);
 }
 
-
+//Load the workflow states
 function loadStates(email, workflowName) {
 
   var xhttp = new XMLHttpRequest();
@@ -131,3 +131,69 @@ function loadStates(email, workflowName) {
   formData.append("name", workflowName);
   xhttp.send(formData);
 }
+
+
+//Load the workflow states
+function updateWFStates() {
+
+  let wfStates = [...document.getElementsByClassName("header")];
+
+  let wfStateStickies = [...document.getElementsByClassName("sticky-area")];
+
+  let stickiesJSON = [];
+
+  wfStateStickies.forEach(stArea => {
+    let stickies = [...stArea.children];
+    let stickyArray = [];
+    stickies.forEach(st => {
+        let sticky = {
+          text : st.getElementsByTagName("p")[0].innerText,
+          color : st.style.backgroundColor,
+          height : st.style.height,
+          width : st.style.width
+        }
+        stickyArray.push(sticky);
+    });
+    stickiesJSON.push(stickyArray);
+  });
+ 
+  
+
+  let statesArray = [];
+  for(let i=0;i<stickiesJSON.length;i++)
+  {
+    let state = {
+      name : wfStates[i].innerText,
+      stickies : stickiesJSON[i]
+     
+    }
+    statesArray.push(state);
+
+  }
+
+  
+  let wfIndex= document.getElementById("workflowsCombo").selectedIndex;
+
+
+  console.log(wfIndex);
+  console.log(statesArray);
+
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function () {
+    if (this.readyState == 4 && this.status == 200) {
+      
+
+      respuesta = eval("(" + xhttp.responseText + ")");
+      console.log(respuesta);
+      
+    }
+  };
+  xhttp.open("POST", "workflow.php", false);
+  var formData = new FormData();
+  formData.append("option", 6);
+  formData.append("email", "lisethGonz6");
+  formData.append("states", statesArray);
+  formData.append("wfIndex", wfIndex);
+  xhttp.send(formData);
+}
+
