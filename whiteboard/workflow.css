@@ -71,6 +71,12 @@ th {
     resize: both;
     overflow: auto;
 
+    min-height: 114px;
+    min-width: 142px;
+
+    max-height: 208px;
+    max-width: 331px;
+
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
@@ -94,8 +100,9 @@ th {
     cursor: text;
 }
 
-.sticky-note * {
-    display: inline-block;
+.sticky-note button, input {
+    max-width: 60px;
+    max-height: 30px;
 }
 
 .sticky-note *:not(:first-child) {

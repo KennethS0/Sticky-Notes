@@ -15,7 +15,6 @@ function deleteColumn(columnHeader) {
 // Function to create new notes in a specific area
 function createNewNote(stickyArea,{text,color,height,width}) {
     var stickyNote = document.createElement("div");
-
     stickyNote.style.backgroundColor = color;
     stickyNote.style.height = height;
     stickyNote.style.width = width;
@@ -30,7 +29,21 @@ function createNewNote(stickyArea,{text,color,height,width}) {
     textArea.append(document.createTextNode(text));
     textArea.setAttribute("contentEditable", "true");
     stickyNote.append(textArea);
+
+    var timer;
+    textArea.addEventListener("keyup", function(event) {
+        clearTimeout(timer);
+        if (event) {
+            timer = setTimeout( () => {
+                
+                console.log("Editado");    
+
+            },
+            1500);
+        }        
+    });
     
+
     // Creates the color changing input
     var colorPicker = document.createElement("input");
     colorPicker.setAttribute("type", "color");
@@ -139,7 +152,7 @@ function addNewColumn(name) {
                 
 
             },
-            3000);
+            1500);
         }        
     });
 

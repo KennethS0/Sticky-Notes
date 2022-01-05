@@ -61,23 +61,31 @@ function login() {
 function newWorkflow() {
   workflowName = document.getElementById("name").value;
   description = document.getElementById("description").value;
-  var xhttp = new XMLHttpRequest();
-  xhttp.onreadystatechange = function () {
-    if (this.readyState == 4 && this.status == 200) {
-      respuesta = eval("(" + xhttp.responseText + ")");
 
-      if (respuesta[0] == false) {
-        alert(JSON.stringify(respuesta[1]));
+  if (workflowName && description) {
+
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function () {
+      if (this.readyState == 4 && this.status == 200) {
+        respuesta = eval("(" + xhttp.responseText + ")");
+
+        if (respuesta[0] == false) {
+          alert(JSON.stringify(respuesta[1]));
+        }
       }
-    }
-  };
-  xhttp.open("POST", "workflow.php", false);
-  var formData = new FormData();
-  formData.append("option", 1);
-  formData.append("email", "lisethGonz6");
-  formData.append("name", workflowName);
-  formData.append("description", description);
-  xhttp.send(formData);
+    };
+    xhttp.open("POST", "workflow.php", false);
+    var formData = new FormData();
+    formData.append("option", 1);
+    formData.append("email", "lisethGonz6");
+    formData.append("name", workflowName);
+    formData.append("description", description);
+    xhttp.send(formData);
+    document.location.reload(); 
+  } else {
+    alert("Necesita un nombre y una descripcion.");
+  }
+
 }
 
 function newSticky() {
@@ -189,22 +197,16 @@ function updateWFStates() {
     statesArray.push(state);
 
   }
-
-  
   let wfIndex= document.getElementById("workflowsCombo").selectedIndex;
-
-
+  
   console.log(wfIndex);
   console.log(statesArray);
 
   var xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function () {
     if (this.readyState == 4 && this.status == 200) {
-      
-
       respuesta = xhttp.responseText;
       console.log(respuesta);
-      
     }
   };
   xhttp.open("POST", "workflow.php", false);
