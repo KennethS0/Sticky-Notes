@@ -194,6 +194,8 @@ function addNewColumn(name) {
     data.append(addNoteButton);
 
     body.append(data);
+
+    return stickyArea;
 }
 
 

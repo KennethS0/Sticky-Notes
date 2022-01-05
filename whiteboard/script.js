@@ -115,10 +115,18 @@ function loadStates(email, workflowName) {
   var xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function () {
     if (this.readyState == 4 && this.status == 200) {
-      
       const jsonData = JSON.parse(xhttp.responseText);  
-      jsonData.forEach(element => {
-        addNewColumn(element.name);
+
+      jsonData.forEach(state => {
+        // Creates each column 
+        let stickyArea = addNewColumn(state.name);
+        let stickies = state.stickies;
+        
+        // Creates each note in the column
+        stickies.forEach(sticky => {
+          createNewNote(stickyArea, sticky);
+        });
+
       });
       
     }

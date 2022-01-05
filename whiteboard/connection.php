@@ -144,11 +144,7 @@ function getStates($conn, $user, $name){
         foreach($workflows as $workflow){
             
             if($workflow->name == $name){
-            
                 $states = $workflow->states;  
-
-                
-                
             }
         }
             

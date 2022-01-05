@@ -83,16 +83,32 @@ if ($option == 2)
     }elseif($action == 5){
 
         $statesList = getStates($conn, $email, $name);
+        // print_r($statesList);
         $jsonResponse = "[";
 
         for($i=0; $i<$statesList->count();$i++)
         {
-            $jsonResponse .= '{"name":"'.$statesList[$i]->name.'"}';
+            // Adds every state to the response
+            $jsonResponse .= '{"name":"'.$statesList[$i]->name.'", "stickies":[';
+            
+            // Adds every sticky note as an array
+            if (isset($statesList[$i]->stickies)) {
+                for($j = 0; $j < $statesList[$i]->stickies->count(); $j++) {
+                    $jsonResponse .= '{"color":"'.$statesList[$i]->stickies[$j]->color.'",';
+                    $jsonResponse .= '"text":"'.$statesList[$i]->stickies[$j]->text.'",';
+                    $jsonResponse .= '"height":"'.$statesList[$i]->stickies[$j]->height.'",';
+                    $jsonResponse .= '"width":"'.$statesList[$i]->stickies[$j]->width.'"}';
+                    if ($j != $statesList[$i]->stickies->count()-1) { $jsonResponse .= ","; }
+                }
+            }
+            
+            $jsonResponse .= ']}';
 
             if($i!=$statesList->count()-1)
             {
                 $jsonResponse .= ",";
             }
+
         }
         $jsonResponse .= "]";
 
