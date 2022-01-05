@@ -23,6 +23,7 @@ function register() {
         alert(JSON.stringify(respuesta[1]));
       } else {
         alert(JSON.stringify(respuesta[1]));
+        window.location.href = "main.html";
       }
     }
   };
@@ -51,7 +52,7 @@ function login() {
       }
     }
   };
-  xhttp.open("POST", "login.php", true);
+  xhttp.open("POST", "login.php", false);
   var formData = new FormData();
   formData.append("email", email);
   formData.append("password", password);

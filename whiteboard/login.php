@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 //require "control_sesion.php"; //importa el control de sesiones el require detecta errores Fatales en la ejecución del archivo importado no así el include!
 include "connection.php";
 
@@ -28,6 +28,7 @@ if($result != true){
 }
 else
 {
+    $_SESSION["email"]=$email;
     echo "[true,{'email':'$email'}]";
 }
 
