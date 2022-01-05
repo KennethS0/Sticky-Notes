@@ -10,6 +10,7 @@ function deleteColumn(columnHeader) {
     // Removes the column
     body.removeChild(body.children[index]);
     headers.removeChild(headers.children[index]);
+    updateWFStates();
 }
 
 // Function to create new notes in a specific area
@@ -35,12 +36,12 @@ function createNewNote(stickyArea,{text,color,height,width}) {
         clearTimeout(timer);
         if (event) {
             timer = setTimeout( () => {
-                
                 console.log("Editado");    
-
             },
-            1500);
+            7000);
         }        
+        // Updates the backend 
+        updateWFStates();
     });
     
 
@@ -49,6 +50,8 @@ function createNewNote(stickyArea,{text,color,height,width}) {
     colorPicker.setAttribute("type", "color");
     colorPicker.addEventListener("change", (e) => {
         stickyNote.style.backgroundColor = e.target.value;
+         // Updates the backend 
+         updateWFStates();
     });
     stickyNote.append(colorPicker);
 
@@ -77,6 +80,8 @@ function createNewNote(stickyArea,{text,color,height,width}) {
                 stickyNote.remove();
             }
         }, 13);
+        // Updates the backend 
+        updateWFStates();
         
     });
     stickyNote.append(deleteButton);
@@ -90,6 +95,7 @@ function createNewNote(stickyArea,{text,color,height,width}) {
         stickyNote.classList.remove('dragging');
 
         // TODO - Update backend
+        updateWFStates();
     });    
 
 
@@ -109,6 +115,9 @@ function createNewNote(stickyArea,{text,color,height,width}) {
             timer = undefined;
         }
     }, 8);
+
+    //Update the backend
+    updateWFStates();
 }
 
 // Loads the workflow
@@ -153,7 +162,9 @@ function addNewColumn(name) {
 
             },
             1500);
-        }        
+        }
+        // Updates the backend 
+        updateWFStates();        
     });
 
     header.append(editableContent);
@@ -207,6 +218,9 @@ function addNewColumn(name) {
     data.append(addNoteButton);
 
     body.append(data);
+
+    // Updates the backend 
+    updateWFStates();
 
     return stickyArea;
 }

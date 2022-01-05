@@ -198,22 +198,21 @@ function updateWFStates() {
 
   }
   let wfIndex= document.getElementById("workflowsCombo").selectedIndex;
-  
-  console.log(wfIndex);
-  console.log(statesArray);
+
+  let strStArray = JSON.stringify(statesArray);
 
   var xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function () {
     if (this.readyState == 4 && this.status == 200) {
       respuesta = xhttp.responseText;
-      console.log(respuesta);
     }
   };
   xhttp.open("POST", "workflow.php", false);
   var formData = new FormData();
-  formData.append("option", 6);
+  formData.append("option", 2);
+  formData.append("action", 6);
   formData.append("email", "lisethGonz6");
-  formData.append("states", statesArray);
+  formData.append("states", strStArray);
   formData.append("wfIndex", wfIndex);
   xhttp.send(formData);
 }

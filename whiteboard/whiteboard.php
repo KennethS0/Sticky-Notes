@@ -36,6 +36,7 @@
         <li><input placeholder="Description" type="text" name="new_wf_description" id="description"></li>
         <li><button onclick="newWorkflow()">Create</button></li>
         <li><button onclick="updateWFStates()">Prueba</button></li>
+        
       </ul>
     </nav>
 

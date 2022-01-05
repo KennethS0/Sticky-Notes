@@ -48,21 +48,23 @@ if ($option == 2)
     //Load states = 5
     //Update workflow = 6
 
-    $name=$_REQUEST["name"];    
+      
     $action = $_REQUEST["action"];
 
     if($action == 1){
 
+        $name=$_REQUEST["name"];  
         $newName=$_REQUEST["newName"];
         updateWorkflowName($conn, $email, $name, $newName);
 
     }elseif($action == 2){
+        $name=$_REQUEST["name"];  
 
         $newDescription=$_REQUEST["newDescription"];
         updateWorkflowDescription($conn, $email, $name, $newDescription);
 
     }elseif($action == 3){
-
+        $name=$_REQUEST["name"];  
         $state=$_REQUEST["state"];
         if(existState($conn, $email, $name,$state)){
             echo ("[false,{'Error':'El estado ya existe en el workflow'}]");
@@ -72,6 +74,7 @@ if ($option == 2)
         }
 
     }elseif($action == 4){
+        $name=$_REQUEST["name"];  
 
         $state=$_REQUEST["state"];
         if(!existState($conn, $email, $name,$state)){
@@ -81,7 +84,7 @@ if ($option == 2)
             deleteState($conn, $email, $name,$state);
         }
     }elseif($action == 5){
-
+        $name=$_REQUEST["name"];  
         $index = $_REQUEST["wfIndex"];
 
         $doc = getWorkflows();
@@ -125,7 +128,7 @@ if ($option == 2)
 
         $states=$_REQUEST["states"];
         $wfIndex=$_REQUEST["wfIndex"];
-        print_r(updateWFStates($conn,$email,$states,$wfIndex));
+        updateWFStates($conn,$email,$states,$wfIndex);
         exit();
     }
 
