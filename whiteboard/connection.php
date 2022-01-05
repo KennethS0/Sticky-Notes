@@ -608,10 +608,16 @@ function updateWFStates($conn,$user,$states,$wfIndex){
     $result = $collection->findOne(['email' => $user]);
 
     $workflows = $result->workflows;
-
-    $filter = array('email'=>$user, '');
-    $update = array('$set'=>array('states'=>$states));   
+    $workflows[$wfIndex]->states = $states;
+    $filter = array('email'=>$user);
+    $update = array('$set'=>array('workflows'=>$workflows));   
     $collection->updateOne($filter,$update);
+     
+        
+    }
+
+
+
     // foreach($result as $document){
       
     //     $workflows = $document->workflows;
