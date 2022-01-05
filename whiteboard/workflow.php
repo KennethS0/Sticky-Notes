@@ -82,9 +82,15 @@ if ($option == 2)
         }
     }elseif($action == 5){
 
+        $index = $_REQUEST["wfIndex"];
+
+        $doc = getWorkflows();
         $statesList = getStates($conn, $email, $name);
-        // print_r($statesList);
-        $jsonResponse = "[";
+        
+        $jsonResponse = '{"name": "'.$doc->workflows[$index]->name.'",';
+        $jsonResponse .= '"description": "'.$doc->workflows[$index]->description.'",';
+
+        $jsonResponse .= '"states": [';
 
         for($i=0; $i<$statesList->count();$i++)
         {
@@ -110,7 +116,8 @@ if ($option == 2)
             }
 
         }
-        $jsonResponse .= "]";
+        $jsonResponse .= "]}";
+        // print_r($workflows);
 
         echo ($jsonResponse);
         exit();

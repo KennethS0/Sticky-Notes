@@ -67,7 +67,7 @@ th {
 
 .sticky-note {
     padding: 10px;
-    margin: 3px;
+    margin: 10px;
     resize: both;
     overflow: auto;
 
@@ -75,11 +75,13 @@ th {
     justify-content: space-between;
     flex-wrap: wrap;
 
+    box-shadow: 4px 4px 3px rgb(129, 129, 129);
+
     transition: 0.2s;
 }
 
 .sticky-note:hover {
-    box-shadow: 2px 2px rgb(129, 129, 129);
+    box-shadow: 6px 6px 3px rgb(129, 129, 129);
 }
 
 .sticky-note:active {

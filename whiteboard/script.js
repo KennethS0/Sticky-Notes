@@ -115,9 +115,16 @@ function loadStates(email, workflowName) {
   var xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function () {
     if (this.readyState == 4 && this.status == 200) {
+      
+      // Gets the data from php
       const jsonData = JSON.parse(xhttp.responseText);  
+      let states = jsonData['states'];
 
-      jsonData.forEach(state => {
+      // Updates the name and the description
+      document.getElementById("workflowName").innerText = jsonData["name"];
+      document.getElementById("workflowDescription").innerText = jsonData["description"];
+
+      states.forEach(state => {
         // Creates each column 
         let stickyArea = addNewColumn(state.name);
         let stickies = state.stickies;
@@ -131,10 +138,14 @@ function loadStates(email, workflowName) {
       
     }
   };
+
+  let index = document.getElementById("workflowsCombo").selectedIndex;
+
   xhttp.open("POST", "workflow.php", false);
   var formData = new FormData();
   formData.append("option", 2);
   formData.append("action", 5);
+  formData.append("wfIndex", index);
   formData.append("email", email);
   formData.append("name", workflowName);
   xhttp.send(formData);
