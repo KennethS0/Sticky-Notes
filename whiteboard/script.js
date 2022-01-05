@@ -183,7 +183,7 @@ function updateWFStates() {
     if (this.readyState == 4 && this.status == 200) {
       
 
-      respuesta = eval("(" + xhttp.responseText + ")");
+      respuesta = xhttp.responseText;
       console.log(respuesta);
       
     }

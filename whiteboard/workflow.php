@@ -7,15 +7,14 @@ include "connection.php";
 error_reporting(E_ERROR | E_WARNING | E_PARSE);
 ini_set("display_errors", 1);
 /*************************************************/
-if(!isset($_REQUEST["name"]) && !isset($_REQUEST["description"]))
-{
-    echo ("[false,{'Error':'Debe enviar los parámetros name y description'}]");
-    exit();
-}
+// if(!isset($_REQUEST["name"]) && !isset($_REQUEST["description"]))
+// {
+//     echo ("[false,{'Error':'Debe enviar los parámetros name y description'}]");
+//     exit();
+// }
+
+
 $email=$_REQUEST["email"];
-$name=$_REQUEST["name"];
-
-
 $option = $_REQUEST["option"];
 
 $conn = get_conection();
@@ -26,6 +25,8 @@ $conn = get_conection();
 
 if ($option == 1)
 {
+    
+    $name=$_REQUEST["name"];
     $description=$_REQUEST["description"];
     if(existWorkflow($conn,$email,$name)){
         echo ("[false,{'Error': 'Ya existe un Workflow con ese nombre.'}]"); 
@@ -46,7 +47,8 @@ if ($option == 2)
     //Delete state action = 4
     //Load states = 5
     //Update workflow = 6
-    
+
+    $name=$_REQUEST["name"];    
     $action = $_REQUEST["action"];
 
     if($action == 1){
@@ -96,16 +98,14 @@ if ($option == 2)
 
         echo ($jsonResponse);
         exit();
+    }elseif($action == 6){
+
+        $states=$_REQUEST["states"];
+        $wfIndex=$_REQUEST["wfIndex"];
+        print_r(updateWFStates($conn,$email,$states,$wfIndex));
+        exit();
     }
 
-}elseif($action == 6){
-
-    $states=$_REQUEST["states"];
-    $wfIndex=$_REQUEST["wfIndex"];
-    updateWFStates($conn,$email,$states,$wfIndex);
-
-    echo ($jsonResponse);
-    exit();
 }
 if ($option== 3)
 {
