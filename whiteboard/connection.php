@@ -69,16 +69,51 @@ function existWorkflow($conn, $user, $name){
     return false;
 }
 
-//Create new user workflow
-function createWorkflow($conn, $user, $name, $description){
-date_default_timezone_set('America/Costa_Rica');
- //Add workflow to user
- $collection = $conn->whiteboard->users;
- $filter = array('email'=>$user);
- $update = array('$push'=>array('workflows'=>[ 'name' => $name, 'creation_date' => date("d/m/Y H:i:s"),'description'=> $description ,'states' => [['name' => 'Sin iniciar','stickies' =>[]],['name' => 'Iniciado','stickies' =>[]],['name' => 'Finalizado','stickies' =>[]]]]));   
- $collection->updateOne($filter, $update);
+// //Create new user workflow
+// function createWorkflow($conn, $user, $name, $description){
 
+//  //Add workflow to user
+//  $collection = $conn->whiteboard->users;
+//  $filter = array('email'=>$user);
+//  $update = array('$push'=>array('workflows'=>[ 'name' => $name, 'creation_date' => date("d/m/Y H:i:s"),'description'=> $description ,'states' => [['name' => 'Sin iniciar','stickies' =>[]],['name' => 'Iniciado','stickies' =>[]],['name' => 'Finalizado','stickies' =>[]]]]));   
+//  $collection->updateOne($filter, $update);
+
+// }
+
+//Create new user workflow
+function createWorkflow($conn, $user, $name, $description,$position){
+    date_default_timezone_set('America/Costa_Rica');
+    $collection = $conn->whiteboard->users;
+    $result = $collection->findOne(['email' => $user]);
+    $workflows = $result->workflows;
+    $newWorkflow = [ 'name' => $name, 'creation_date' => date("d/m/Y H:i:s"),'description'=> $description ,'states' => [['name' => 'Sin iniciar','stickies' =>[]],['name' => 'Iniciado','stickies' =>[]],['name' => 'Finalizado','stickies' =>[]]]];
+    
+    if($position<$workflows->count()){
+        
+        $actualWorkflow =$newWorkflow;
+
+        for($i=$position;$i<$workflows->count();$i++){
+
+            $lastWorkflow = $workflows[$i];
+            $workflows[$i] = $actualWorkflow;
+            $actualWorkflow = $lastWorkflow;
+
+        }
+
+        $workflows->append($actualWorkflow);
+
+    }else{
+
+        $workflows->append($newWorkflow);
+    
+    }
+    $filter = array('email'=>$user);
+    $update = array('$set'=>array('workflows'=>$workflows));   
+    $collection->updateOne($filter,$update);
+   
+  
 }
+    
 
 //Get workflows by user
 function getWorkFlows() {
@@ -478,6 +513,8 @@ function updateStickiesPosition($stickies,$state,$position){
      
     
 }
+
+
 
 //Change the size of a specific sticky
 function updateStickySize($conn,$user,$name,$text,$size){

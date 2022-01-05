@@ -61,9 +61,9 @@ function login() {
 function newWorkflow() {
   workflowName = document.getElementById("name").value;
   description = document.getElementById("description").value;
+  //get workflow position
 
   if (workflowName && description) {
-
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function () {
       if (this.readyState == 4 && this.status == 200) {
@@ -80,12 +80,13 @@ function newWorkflow() {
     formData.append("email", "lisethGonz6");
     formData.append("name", workflowName);
     formData.append("description", description);
+    formData.append("position", position);
+
     xhttp.send(formData);
-    document.location.reload(); 
+    document.location.reload();
   } else {
     alert("Necesita un nombre y una descripcion.");
   }
-
 }
 
 function newSticky() {
@@ -119,31 +120,28 @@ function newSticky() {
 
 //Load the workflow states
 function loadStates(email, workflowName) {
-
   var xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function () {
     if (this.readyState == 4 && this.status == 200) {
-      
       // Gets the data from php
-      const jsonData = JSON.parse(xhttp.responseText);  
-      let states = jsonData['states'];
+      const jsonData = JSON.parse(xhttp.responseText);
+      let states = jsonData["states"];
 
       // Updates the name and the description
       document.getElementById("workflowName").innerText = jsonData["name"];
-      document.getElementById("workflowDescription").innerText = jsonData["description"];
+      document.getElementById("workflowDescription").innerText =
+        jsonData["description"];
 
-      states.forEach(state => {
-        // Creates each column 
+      states.forEach((state) => {
+        // Creates each column
         let stickyArea = addNewColumn(state.name);
         let stickies = state.stickies;
-        
+
         // Creates each note in the column
-        stickies.forEach(sticky => {
+        stickies.forEach((sticky) => {
           createNewNote(stickyArea, sticky);
         });
-
       });
-      
     }
   };
 
@@ -159,45 +157,38 @@ function loadStates(email, workflowName) {
   xhttp.send(formData);
 }
 
-
 //Load the workflow states
 function updateWFStates() {
-
   let wfStates = [...document.getElementsByClassName("header")];
 
   let wfStateStickies = [...document.getElementsByClassName("sticky-area")];
 
   let stickiesJSON = [];
 
-  wfStateStickies.forEach(stArea => {
+  wfStateStickies.forEach((stArea) => {
     let stickies = [...stArea.children];
     let stickyArray = [];
-    stickies.forEach(st => {
-        let sticky = {
-          text : st.getElementsByTagName("p")[0].innerText,
-          color : st.style.backgroundColor,
-          height : st.style.height,
-          width : st.style.width
-        }
-        stickyArray.push(sticky);
+    stickies.forEach((st) => {
+      let sticky = {
+        text: st.getElementsByTagName("p")[0].innerText,
+        color: st.style.backgroundColor,
+        height: st.style.height,
+        width: st.style.width,
+      };
+      stickyArray.push(sticky);
     });
     stickiesJSON.push(stickyArray);
   });
- 
-  
 
   let statesArray = [];
-  for(let i=0;i<stickiesJSON.length;i++)
-  {
+  for (let i = 0; i < stickiesJSON.length; i++) {
     let state = {
-      name : wfStates[i].innerText,
-      stickies : stickiesJSON[i]
-     
-    }
+      name: wfStates[i].innerText,
+      stickies: stickiesJSON[i],
+    };
     statesArray.push(state);
-
   }
-  let wfIndex= document.getElementById("workflowsCombo").selectedIndex;
+  let wfIndex = document.getElementById("workflowsCombo").selectedIndex;
 
   let strStArray = JSON.stringify(statesArray);
 
@@ -216,4 +207,3 @@ function updateWFStates() {
   formData.append("wfIndex", wfIndex);
   xhttp.send(formData);
 }
-

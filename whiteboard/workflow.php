@@ -28,12 +28,13 @@ if ($option == 1)
     
     $name=$_REQUEST["name"];
     $description=$_REQUEST["description"];
+    $position = $_REQUEST["position"];
     if(existWorkflow($conn,$email,$name)){
         echo ("[false,{'Error': 'Ya existe un Workflow con ese nombre.'}]"); 
         exit();
     }
     else{
-        createWorkflow($conn,$email,$name,$description);
+        createWorkflow($conn,$email,$name,$description,$position);
     }
    
 
