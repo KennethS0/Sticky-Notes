@@ -21,7 +21,7 @@
       <ul class="menu">
         <li>Username</li>
         <li>Workflows:
-          <select name="workflows" id="workflowsCombo">
+          <select onchange="loadWorkflow()" name="workflows" id="workflowsCombo">
             <?php
               foreach(getWorkFlows()->workflows as $wf) {
                 echo '<option value="'.$wf->name.'">'.$wf->name.'</option>'; 
@@ -30,7 +30,6 @@
           </select>
 
         </li>
-        <li><button onclick="loadWorkflow()">Load</button></li>
         <li><button>Delete</button></li>
 
         <li>Create: <input placeholder="Name" type="text" name="new_wf_name" id="name"></li>
@@ -74,4 +73,7 @@
   <script src="speech.js"></script>
   <script src="whiteboard.js"></script>
   <script src="script.js"></script>
+  <script>
+    loadWorkflow();
+  </script>
 </html>
