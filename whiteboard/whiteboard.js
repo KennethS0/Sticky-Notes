@@ -132,6 +132,7 @@ function loadWorkflow() {
 
     document.getElementById("head-row").innerHTML = "";
     document.getElementById("body-row").innerHTML = "";
+    document.getElementById("foot-row").innerHTML = "";
 
     var user = "lisethGonz6"
     loadStates(user,selectedWorkflow);
