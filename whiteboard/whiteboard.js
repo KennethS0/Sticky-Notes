@@ -137,6 +137,7 @@ function loadWorkflow() {
 
 // Creation of new columns
 function addNewColumn(name) {
+
     // Obtains the important rows
     const headers = document.getElementById("head-row");
     const body = document.getElementById("body-row");
@@ -220,6 +221,22 @@ function addNewColumn(name) {
 
 
     body.append(data);
+
+    let pos_options = document.getElementById("st_position").childNodes.length;
+    console.log(pos_options);
+    if(pos_options>0)
+    {
+        let pos_comboBox = document.getElementById("st_position")
+        const selectedPosition = pos_comboBox.options[pos_comboBox.selectedIndex].text;
+
+        let headers_row = [...document.getElementById("head-row").children];
+        let bodies_row = [...document.getElementById("body-row").children];
+        let footers_row = [...document.getElementById("foot-row").children];
+
+        console.log(headers_row);
+    }
+
+    
 
     // Updates the backend 
     updateWFStates();

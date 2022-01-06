@@ -32,11 +32,15 @@
         </li>
         <li><button>Delete</button></li>
 
-        <li>Create: <input placeholder="Name" type="text" name="new_wf_name" id="name"></li>
-        <li><input placeholder="Description" type="text" name="new_wf_description" id="description"></li>
-        <li><button onclick="newWorkflow()">Create</button></li>
-        <li><button onclick="updateWFStates()">Prueba</button></li>
+        <li>  | New workflow: <input placeholder="Name" type="text" name="new_wf_name" id="wf_name"></li>
+        <li><input placeholder="Description" type="text" name="new_wf_description" id="wf_description"></li>
+        <li><button onclick="newWorkflow()">Create workflow</button></li>
         <li><button onclick="window.location.href='logout.php'">Logout</button></li>
+
+        <li>  | New state: <input placeholder="Name" type="text" name="new_st_name" id="st_name"></li>
+        <li> Position: <select name="new_st_position" id="st_position"></select></li>
+        <li><button class="addColumnButton" onclick="addNewColumn(document.getElementById('st_name').value)">Create state</button></li>
+       
       </ul>
     </nav>
 
@@ -71,8 +75,6 @@
           </tfoot>
 
         </table>
-
-        <button class="addColumnButton" onclick="addNewColumn('New Column')">+</button>
       </div>
 
     </div>

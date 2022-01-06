@@ -60,8 +60,8 @@ function login() {
 }
 
 function newWorkflow() {
-  workflowName = document.getElementById("name").value;
-  description = document.getElementById("description").value;
+  workflowName = document.getElementById("wf_name").value;
+  description = document.getElementById("wf_description").value;
 
   if (workflowName && description) {
     var xhttp = new XMLHttpRequest();
@@ -131,16 +131,32 @@ function loadStates(email, workflowName) {
       document.getElementById("workflowDescription").innerText =
         jsonData["description"];
 
+      
+      var select = document.getElementById("st_position");
+      select.options.length = 0;
+
+      let pos_count = 1;
       states.forEach((state) => {
         // Creates each column
         let stickyArea = addNewColumn(state.name);
         let stickies = state.stickies;
+
+        
+        let option = document.createElement("option");
+        option.text = pos_count;
+        select = document.getElementById("st_position");
+        select.appendChild(option);
+        pos_count++;
 
         // Creates each note in the column
         stickies.forEach((sticky) => {
           createNewNote(stickyArea, sticky);
         });
       });
+      let option = document.createElement("option");
+      option.text = pos_count;
+      select = document.getElementById("st_position");
+      select.appendChild(option);
     }
   };
 
