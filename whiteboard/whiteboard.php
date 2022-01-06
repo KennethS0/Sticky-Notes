@@ -19,8 +19,8 @@
     <!-- Navbar -->
     <nav>
       <ul class="menu">
-        <li>Username</li>
-        <li>Workflows:
+        <li>Inclusive Whiteboard</li>
+        <li>  | Workflows:
           <select onchange="loadWorkflow()" name="workflows" id="workflowsCombo">
             <?php
             session_start();
@@ -39,11 +39,12 @@
         <li>  | New workflow: <input placeholder="Name" type="text" name="new_wf_name" id="wf_name"></li>
         <li><input placeholder="Description" type="text" name="new_wf_description" id="wf_description"></li>
         <li><button onclick="newWorkflow()">Create workflow</button></li>
-        <li><button onclick="window.location.href='logout.php'">Logout</button></li>
+        
 
         <li>  | New state: <input placeholder="Name" type="text" name="new_st_name" id="st_name"></li>
         <li> Position: <select name="new_st_position" id="st_position"></select></li>
         <li><button id="addColumnButton">Create state</button></li>
+        <li><button onclick="window.location.href='logout.php'">Logout</button></li>
        
       </ul>
     </nav>
@@ -89,5 +90,11 @@
   <script src="script.js"></script>
   <script>
     loadWorkflow();
+    var logged_user =  
+    <?php if($_SESSION["email"])
+    {
+      echo "'".$_SESSION["email"]."'";
+    }
+    ?>;
   </script>
 </html>

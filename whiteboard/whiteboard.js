@@ -139,9 +139,16 @@ function loadWorkflow() {
     document.getElementById("body-row").innerHTML = "";
     document.getElementById("foot-row").innerHTML = "";
 
-    var user = "lisethGonz6"
-    loadStates(user, selectedWorkflow);
+    if(logged_user)
+    {
+        window.localStorage.setItem(logged_user,selectedWorkflow);
+    }
+    
+    console.log(window.localStorage);
+    loadStates(selectedWorkflow);
 }
+ 
+  
 
 // Creation of new columns
 function addNewColumn(name, position=-1) {
@@ -295,11 +302,4 @@ function positionElement(stickyArea, posY) {
             return closest;
         }
     }, { offset: Number.NEGATIVE_INFINITY}).element;
-}
-
-// Adds the note in the corresponding area
-function updatePos(stickyArea, posY) {
-
-    let stikies = document.getElementsByClassName('sticky-area').children;
-    console.log(stikies);
 }
