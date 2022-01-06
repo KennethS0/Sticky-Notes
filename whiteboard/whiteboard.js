@@ -39,12 +39,11 @@ function createNewNote(stickyArea,{text,color,height,width}) {
         clearTimeout(timer);
         if (event) {
             timer = setTimeout( () => {
-                console.log("Editado");    
+                // Updates the backend 
+                updateWFStates();    
             },
             3000);
         }        
-        // Updates the backend 
-        updateWFStates();
     });
     
 
@@ -63,7 +62,6 @@ function createNewNote(stickyArea,{text,color,height,width}) {
     speech.append(document.createTextNode("Listen"));
     speech.addEventListener("click", (e) => {
         const text = textArea.textContent;
-
         // Function in "speech.js"
         speak(text);
     });
@@ -81,12 +79,12 @@ function createNewNote(stickyArea,{text,color,height,width}) {
                 clearInterval(timer);
                 timer = undefined;
                 stickyNote.remove();
+                // Updates the backend 
+                updateWFStates();
             }
         }, 13);
-        // Updates the backend 
-        updateWFStates();
-        
     });
+
     stickyNote.append(deleteButton);
 
     // Adds the events for dragging
@@ -96,8 +94,7 @@ function createNewNote(stickyArea,{text,color,height,width}) {
 
     stickyNote.addEventListener('dragend', () => {
         stickyNote.classList.remove('dragging');
-
-        // TODO - Update backend
+        // Update backend
         updateWFStates();
     });    
 
@@ -116,11 +113,11 @@ function createNewNote(stickyArea,{text,color,height,width}) {
         if (steps >= 20) {
             clearInterval(timer);
             timer = undefined;
+
+            //Update the backend
+            updateWFStates();
         }
     }, 8);
-
-    //Update the backend
-    updateWFStates();
 }
 
 // Loads the workflow
@@ -162,12 +159,11 @@ function addNewColumn(name) {
             timer = setTimeout( () => {    
                 // Conexion al backend para actualizar header
                 const index = [...headers.children].indexOf(header);
-        
+                // Updates the backend 
+                updateWFStates();   
             },
             1500);
-        }
-        // Updates the backend 
-        updateWFStates();        
+        }     
     });
 
     header.append(editableContent);

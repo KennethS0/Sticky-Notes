@@ -59,6 +59,7 @@ th {
 /* COLUMNS AND STICKY NOTES */
 .sticky-area {
     padding: 1rem;
+    min-height: 500px;
 }
 
 #body-row td button {
