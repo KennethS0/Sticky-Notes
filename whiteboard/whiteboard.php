@@ -23,9 +23,13 @@
         <li>Workflows:
           <select onchange="loadWorkflow()" name="workflows" id="workflowsCombo">
             <?php
+            session_start();
+            if($_SESSION["email"]){
               foreach(getWorkFlows()->workflows as $wf) {
                 echo '<option value="'.$wf->name.'">'.$wf->name.'</option>'; 
               }
+            }
+              
             ?>
           </select>
 
