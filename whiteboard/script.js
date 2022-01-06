@@ -62,7 +62,6 @@ function login() {
 function newWorkflow() {
   workflowName = document.getElementById("name").value;
   description = document.getElementById("description").value;
-  //get workflow position
 
   if (workflowName && description) {
     var xhttp = new XMLHttpRequest();
@@ -81,7 +80,6 @@ function newWorkflow() {
     formData.append("email", "lisethGonz6");
     formData.append("name", workflowName);
     formData.append("description", description);
-    formData.append("position", position);
 
     xhttp.send(formData);
     document.location.reload();
