@@ -3,7 +3,6 @@ require 'vendor/autoload.php'
 
 ?>
 <?php
-
 //Get database conection
 function get_conection(){
     
@@ -86,7 +85,7 @@ function createWorkflow($conn, $user, $name, $description){
 function getWorkFlows() {
     $conn = get_conection();
     $collection = $conn->whiteboard->users;
-    $res = $collection->findOne(['email' => 'lisethGonz6']);
+    $res = $collection->findOne(['email' => $_SESSION["email"]]);
     return $res;
 }
 
@@ -187,32 +186,6 @@ function existState($conn, $user, $name,$state){
     return false;
 }
 
-// //Add new state to workflow
-// function addState($conn, $user, $name,$newState){
-//     $collection = $conn->whiteboard->users;
-//     $result = $collection->find(['email' => $user]);
-
-//     foreach($result as $document){
-      
-//         $workflows = $document->workflows;
-
-
-//         foreach($workflows as $workflow){
-            
-//             if($workflow->name == $name){
-               
-//                 $array = $workflow->states;              
-//                 $array->append($newState);
-//                 $workflow->states= $array;
-//                 $filter = array('email'=>$user);
-//                 $update = array('$set'=>array('workflows'=>$workflows));   
-//                 $collection->updateOne($filter,$update);
-//             }
-//         }
-            
-           
-//     }
-// }
 //Create new user workflow
 function addState($conn, $user, $name,$newState,$position){
     date_default_timezone_set('America/Costa_Rica');
