@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Whiteboard</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script src="script.js"></script>
+  </head>
+  <body>
+    
+    
+    <div class="sidenav">
+      <p>Username</p>
+      <hr>
+
+      <form action="whiteboard.html">
+        <label for="board_in">Make a new board:</label>
+        <input type="text" name="board" id="board_in" minlength="5" required>
+        <button onclick="create_board()">Create!</button>
+      </form>
+     
+      
+      <hr>
+      
+      <div id="boards_area">
+        <button>AQUI</button>
+      </div>
+    </div>
+
+    <div class="main">
+
+    
+    <div class="board">
+      <table
+        width="100%"
+        id="mainTable"
+        border="2px"
+        style="
+          border: 5px;
+          border-style: solid;
+          border-color: rgb(152, 150, 245);
+          border-collapse: collapse;
+        "
+        cellspacing="5px"
+        cellpadding="15px"
+      >
+        <thead style="background-color: rgb(152, 150, 245); color: white">
+          <tr>
+            <th>On hold</th>
+            <th>In progress</th>
+            <th>Needs review</th>
+            <th>Approved</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td width="340" height="700" contenteditable="true"></td>
+            <td width="340" height="700" contenteditable="true"></td>
+            <td width="340" height="700" contenteditable="true"></td>
+            <td width="340" height="700" contenteditable="false">
+              <label for="name"><b>Name <br/>   </b> </label>
+              <input id="name" type="text" />
+              <br></br>
+              <label for="description"><b>Description <br/>  </b> </label>
+              <input id="description" type="text" />
+              <br></br>
+              <button class="buttonRight" onclick="newWorkflow()">New Workflow</button>
+              <br></br>
+              <label for="text"><b>Text <br/>   </b> </label>
+              <input id="text" type="text" />
+              <br></br>
+              <label for="workflowName"><b>Workflow name <br/>  </b> </label>
+              <input id="workflowName" type="text" />
+              <br></br>
+              <label for="state"><b>State <br/>  </b> </label>
+              <input id="state" type="text" />
+              <br></br>
+             <label for="color"><b>Color <br/>  </b> </label>
+              <input id="color" type="text" />
+              <br></br>
+             <label for="size"><b>Size <br/>  </b> </label>
+              <input id="size" type="text" />
+              <br></br>
+              <label for="posX"><b>PosX <br/>  </b> </label>
+              <input id="posX" type="text" />
+              <br></br>
+              <label for="posY"><b>PosY <br/>  </b> </label>
+              <input id="posY" type="text" />
+              <br></br>
+              <button class="buttonRight" onclick="newSticky()">New Sticky</button>
+            </td>
+          </tr>
+        </tbody>
+        <tfoot></tfoot>
+      </table>
+    <link rel="stylesheet" href="styles.css" />    
+    </div>
+
+    
+
+  </body>
+
+  <script src="whiteboard.js"></script>
+</html>

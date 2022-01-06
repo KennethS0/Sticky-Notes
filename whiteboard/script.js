@@ -77,7 +77,6 @@ function newWorkflow() {
     xhttp.open("POST", "workflow.php", false);
     var formData = new FormData();
     formData.append("option", 1);
-    formData.append("email", "lisethGonz6");
     formData.append("name", workflowName);
     formData.append("description", description);
 
@@ -108,7 +107,6 @@ function newSticky() {
   xhttp.open("POST", "sticky.php", false);
   var formData = new FormData();
   formData.append("option", 1);
-  formData.append("email", "lisethGonz6");
   formData.append("name", workflowName);
   formData.append("text", text);
   formData.append("state", state);
@@ -131,7 +129,6 @@ function loadStates(email, workflowName) {
       document.getElementById("workflowDescription").innerText =
         jsonData["description"];
 
-      
       var select = document.getElementById("st_position");
       select.options.length = 0;
 
@@ -141,7 +138,6 @@ function loadStates(email, workflowName) {
         let stickyArea = addNewColumn(state.name);
         let stickies = state.stickies;
 
-        
         let option = document.createElement("option");
         option.text = pos_count;
         select = document.getElementById("st_position");
@@ -167,7 +163,6 @@ function loadStates(email, workflowName) {
   formData.append("option", 2);
   formData.append("action", 5);
   formData.append("wfIndex", index);
-  formData.append("email", email);
   formData.append("name", workflowName);
   xhttp.send(formData);
 }
@@ -217,7 +212,6 @@ function updateWFStates() {
   var formData = new FormData();
   formData.append("option", 2);
   formData.append("action", 6);
-  formData.append("email", "lisethGonz6");
   formData.append("states", strStArray);
   formData.append("wfIndex", wfIndex);
   xhttp.send(formData);
