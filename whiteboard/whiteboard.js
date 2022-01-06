@@ -22,7 +22,7 @@ function deleteColumn(columnHeader) {
     headers.removeChild(headers.children[index]);
     footers.removeChild(footers.children[index]);
 
-    reloadInsertOptions([...body.children].le);
+    reloadInsertOptions([...body.children].length);
     updateWFStates();
 }
 
