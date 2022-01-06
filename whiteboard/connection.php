@@ -69,50 +69,17 @@ function existWorkflow($conn, $user, $name){
     return false;
 }
 
-// //Create new user workflow
-// function createWorkflow($conn, $user, $name, $description){
+ //Create new user workflow
+function createWorkflow($conn, $user, $name, $description){
 
-//  //Add workflow to user
-//  $collection = $conn->whiteboard->users;
-//  $filter = array('email'=>$user);
-//  $update = array('$push'=>array('workflows'=>[ 'name' => $name, 'creation_date' => date("d/m/Y H:i:s"),'description'=> $description ,'states' => [['name' => 'Sin iniciar','stickies' =>[]],['name' => 'Iniciado','stickies' =>[]],['name' => 'Finalizado','stickies' =>[]]]]));   
-//  $collection->updateOne($filter, $update);
+ //Add workflow to user
+ $collection = $conn->whiteboard->users;
+ $filter = array('email'=>$user);
+ $update = array('$push'=>array('workflows'=>[ 'name' => $name, 'creation_date' => date("d/m/Y H:i:s"),'description'=> $description ,'states' => [['name' => 'Sin iniciar','stickies' =>[]],['name' => 'Iniciado','stickies' =>[]],['name' => 'Finalizado','stickies' =>[]]]]));   
+ $collection->updateOne($filter, $update);
 
-// }
-
-//Create new user workflow
-function createWorkflow($conn, $user, $name, $description,$position){
-    date_default_timezone_set('America/Costa_Rica');
-    $collection = $conn->whiteboard->users;
-    $result = $collection->findOne(['email' => $user]);
-    $workflows = $result->workflows;
-    $newWorkflow = [ 'name' => $name, 'creation_date' => date("d/m/Y H:i:s"),'description'=> $description ,'states' => [['name' => 'Sin iniciar','stickies' =>[]],['name' => 'Iniciado','stickies' =>[]],['name' => 'Finalizado','stickies' =>[]]]];
-    
-    if($position<$workflows->count()){
-        
-        $actualWorkflow =$newWorkflow;
-
-        for($i=$position;$i<$workflows->count();$i++){
-
-            $lastWorkflow = $workflows[$i];
-            $workflows[$i] = $actualWorkflow;
-            $actualWorkflow = $lastWorkflow;
-
-        }
-
-        $workflows->append($actualWorkflow);
-
-    }else{
-
-        $workflows->append($newWorkflow);
-    
-    }
-    $filter = array('email'=>$user);
-    $update = array('$set'=>array('workflows'=>$workflows));   
-    $collection->updateOne($filter,$update);
-   
-  
 }
+
     
 
 //Get workflows by user
@@ -220,33 +187,71 @@ function existState($conn, $user, $name,$state){
     return false;
 }
 
-//Add new state to workflow
-function addState($conn, $user, $name,$newState){
-    $collection = $conn->whiteboard->users;
-    $result = $collection->find(['email' => $user]);
+// //Add new state to workflow
+// function addState($conn, $user, $name,$newState){
+//     $collection = $conn->whiteboard->users;
+//     $result = $collection->find(['email' => $user]);
 
-    foreach($result as $document){
+//     foreach($result as $document){
       
-        $workflows = $document->workflows;
+//         $workflows = $document->workflows;
 
 
-        foreach($workflows as $workflow){
+//         foreach($workflows as $workflow){
             
-            if($workflow->name == $name){
+//             if($workflow->name == $name){
                
-                $array = $workflow->states;              
-                $array->append($newState);
-                $workflow->states= $array;
-                $filter = array('email'=>$user);
-                $update = array('$set'=>array('workflows'=>$workflows));   
-                $collection->updateOne($filter,$update);
-            }
-        }
+//                 $array = $workflow->states;              
+//                 $array->append($newState);
+//                 $workflow->states= $array;
+//                 $filter = array('email'=>$user);
+//                 $update = array('$set'=>array('workflows'=>$workflows));   
+//                 $collection->updateOne($filter,$update);
+//             }
+//         }
             
            
-    }
-}
+//     }
+// }
+//Create new user workflow
+function addState($conn, $user, $name,$newState,$position){
+    date_default_timezone_set('America/Costa_Rica');
+    $collection = $conn->whiteboard->users;
+    $result = $collection->findOne(['email' => $user]);
+    $workflows = $result->workflows;
 
+    foreach($workflows as $workflow){
+        
+        if($workflow->name == $name){
+            
+            $states = $workflow->states; 
+            if($position<$states->count()){
+                
+                $actualState =$newState;
+
+                for($i=$position;$i<$states->count();$i++){
+
+                    $lastState = $states[$i];
+                    $states[$i] = $actualState;
+                    $actualState = $lastState;
+
+                }
+
+                $states->append($actualState);
+
+            }else{
+
+                $states->append($newState);
+            
+            }
+        }
+    }
+    $filter = array('email'=>$user);
+    $update = array('$set'=>array('workflows'=>$workflows));   
+    $collection->updateOne($filter,$update);
+  
+    
+}
 //Delete workflow state
 function deleteState($conn, $user, $name,$state){
     $collection = $conn->whiteboard->users;
