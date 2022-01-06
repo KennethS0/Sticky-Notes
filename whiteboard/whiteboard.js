@@ -1,15 +1,18 @@
 // Deletes columns along with its notes
 function deleteColumn(columnHeader) {
     // Obtains the index of the column
-
     var headers = columnHeader.parentNode;
     var index = Array.prototype.indexOf.call(headers.children, columnHeader);
+
     // Obtains the data row
     var body = document.getElementById("body-row");
+    let footers = document.getElementById("foot-row");
+
 
     // Removes the column
     body.removeChild(body.children[index]);
     headers.removeChild(headers.children[index]);
+    footers.removeChild(footers.children[index]);
     updateWFStates();
 }
 
@@ -139,6 +142,7 @@ function addNewColumn(name) {
     // Obtains the important rows
     const headers = document.getElementById("head-row");
     const body = document.getElementById("body-row");
+    const foot = document.getElementById("foot-row");
 
     // Adds a new header
     var header = document.createElement("th");
@@ -154,12 +158,10 @@ function addNewColumn(name) {
     editableContent.addEventListener("keyup", function(event) {
         clearTimeout(timer);
         if (event) {
-            timer = setTimeout( () => {
-                
+            timer = setTimeout( () => {    
                 // Conexion al backend para actualizar header
                 const index = [...headers.children].indexOf(header);
-                
-
+        
             },
             1500);
         }
@@ -215,7 +217,10 @@ function addNewColumn(name) {
     addNoteButton.onclick = function(event) {
         createNewNote(stickyArea,{'color' : '#FFFF00','text' : 'New Sticky!!','height' : '97px','width' : '262px'});
     }
-    data.append(addNoteButton);
+    let footer = document.createElement("td");
+    footer.append(addNoteButton);
+    foot.append(footer);
+
 
     body.append(data);
 

@@ -63,6 +63,13 @@
               
             </tr>
           </tbody>
+
+          <tfoot>
+            <tr id="foot-row">
+              
+            </tr>
+          </tfoot>
+
         </table>
 
         <button class="addColumnButton" onclick="addNewColumn('New Column')">+</button>
