@@ -39,7 +39,7 @@
 
         <li>  | New state: <input placeholder="Name" type="text" name="new_st_name" id="st_name"></li>
         <li> Position: <select name="new_st_position" id="st_position"></select></li>
-        <li><button class="addColumnButton" onclick="addNewColumn(document.getElementById('st_name').value)">Create state</button></li>
+        <li><button id="addColumnButton">Create state</button></li>
        
       </ul>
     </nav>

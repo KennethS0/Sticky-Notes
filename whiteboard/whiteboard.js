@@ -1,3 +1,11 @@
+// Adds the event to creating new columns
+document.getElementById("addColumnButton").addEventListener("click", (e) => {
+    let name = document.getElementById("st_name").value;
+    let position = document.getElementById("st_position").selectedIndex;
+    addNewColumn(name, position);
+});
+
+
 // Deletes columns along with its notes
 function deleteColumn(columnHeader) {
     // Obtains the index of the column
@@ -13,6 +21,8 @@ function deleteColumn(columnHeader) {
     body.removeChild(body.children[index]);
     headers.removeChild(headers.children[index]);
     footers.removeChild(footers.children[index]);
+
+    reloadInsertOptions([...body.children].length);
     updateWFStates();
 }
 
@@ -125,18 +135,16 @@ function loadWorkflow() {
     const workflowComboBox = document.getElementById("workflowsCombo");
     const selectedWorkflow = workflowComboBox.options[workflowComboBox.selectedIndex].text;
     
-    //back 
-
     document.getElementById("head-row").innerHTML = "";
     document.getElementById("body-row").innerHTML = "";
     document.getElementById("foot-row").innerHTML = "";
 
     var user = "lisethGonz6"
-    loadStates(user,selectedWorkflow);
+    loadStates(user, selectedWorkflow);
 }
 
 // Creation of new columns
-function addNewColumn(name) {
+function addNewColumn(name, position=-1) {
 
     // Obtains the important rows
     const headers = document.getElementById("head-row");
@@ -145,7 +153,6 @@ function addNewColumn(name) {
 
     // Adds a new header
     var header = document.createElement("th");
-    headers.append(header);
 
     // Adds editable content to the header
     var editableContent = document.createElement("div");
@@ -217,31 +224,61 @@ function addNewColumn(name) {
     }
     let footer = document.createElement("td");
     footer.append(addNoteButton);
-    foot.append(footer);
-
-
-    body.append(data);
-
-    let pos_options = document.getElementById("st_position").childNodes.length;
-    console.log(pos_options);
-    if(pos_options>0)
-    {
-        let pos_comboBox = document.getElementById("st_position")
-        const selectedPosition = pos_comboBox.options[pos_comboBox.selectedIndex].text;
-
-        let headers_row = [...document.getElementById("head-row").children];
-        let bodies_row = [...document.getElementById("body-row").children];
-        let footers_row = [...document.getElementById("foot-row").children];
-
-        console.log(headers_row);
-    }
+    
+    // Checks if a position is being sent
+    if (position == -1) {
+        foot.append(footer);
+        body.append(data);
+        headers.append(header);
+    } 
+    // Sends it to the selected position
+    else {
+        let footers = [...document.getElementById("foot-row").children];
+        let bodies = [...document.getElementById("body-row").children];
+        let headers_th = [...headers.children];
+        
+        footers.splice(position, 0, footer);
+        bodies.splice(position, 0, data);
+        headers_th.splice(position, 0, header);
+        
+        headers.innerHTML = "";
+        body.innerHTML = "";
+        foot.innerHTML = "";
 
     
+        for (let i = 0; i < footers.length; i++) {
+            headers.append(headers_th[i]);
+            body.append(bodies[i]);
+            foot.append(footers[i]);
+        }
+
+        reloadInsertOptions(footers.length);
+    }
 
     // Updates the backend 
     updateWFStates();
 
     return stickyArea;
+}
+
+
+// Reloads the insert for new columns
+function reloadInsertOptions(length) {
+    let select = document.getElementById("st_position");
+    select.innerHTML = "";
+    console.log(length);
+
+    let addOption = function (i) {
+        let option = document.createElement("option");
+        option.text = i + 1;
+        select.appendChild(option);
+        console.log("Added option");
+    }
+
+    for (let index = 0; index < length + 1; index++) {
+        console.log("Adding option");
+        addOption(index);
+    }
 }
 
 
