@@ -56,7 +56,14 @@ if ($option == 2)
 
         $name=$_REQUEST["name"];  
         $newName=$_REQUEST["newName"];
-        updateWorkflowName($conn, $email, $name, $newName);
+    
+        if(existWorkflow($conn,$email,$newName)){
+            echo ("[false,{'Error': 'Ya existe un Workflow con ese nombre.'}]"); 
+            exit();
+        }
+        else{
+            updateWorkflowName($conn, $email, $name, $newName);
+        }
 
     }elseif($action == 2){
         $name=$_REQUEST["name"];  
@@ -134,9 +141,12 @@ if ($option == 2)
     }
 
 }
-if ($option== 3)
+if ($option == 3)
 {
-    deleteWorkflow($conn,$name,$description);
+    $name=$_REQUEST["name"]; 
+    deleteWorkflow($conn,$email,$name);
+    echo($name);
+    exit();
     
 }
 

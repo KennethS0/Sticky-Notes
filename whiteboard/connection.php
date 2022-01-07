@@ -263,28 +263,22 @@ function deleteState($conn, $user, $name,$state){
 //Delete user workflow
 function deleteWorkflow($conn, $user, $name){
     $collection = $conn->whiteboard->users;
-    $result = $collection->find(['email' => $user]);
+    $result = $collection->findOne(['email' => $user]);
 
-    foreach($result as $document){
-      
-        $workflows = $document->workflows;
+    $workflows = $result->workflows;
+    $count = $workflows->count();
+    for ($i = 0; $i < $count; $i++) {
 
-        $count = $workflows->count();
-        for ($i = 0; $i < $count; $i++) {
-            
-            if($workflows[$i]->name == $name){
-                $workflows->offsetUnset($i);
-            }
-            
-            $filter = array('email'=>$user);
-            $update = array('$set'=>array('workflows'=>$workflows));   
-            $collection->updateOne($filter,$update);
+        if($workflows[$i]->name == $name){
+            $workflows->offsetUnset($i);
         }
+
+        $filter = array('email'=>$user);
+        $update = array('$set'=>array('workflows'=>$workflows));
+        $collection->updateOne($filter,$update);
     }
-            
-           
-    
 }
+
 //Get the position of the last sticky in the state
 function getLastPosition($conn,$user,$name,$state){
     $collection = $conn->whiteboard->users;

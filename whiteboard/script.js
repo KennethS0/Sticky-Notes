@@ -72,6 +72,7 @@ function newWorkflow() {
         if (respuesta[0] == false) {
           alert(JSON.stringify(respuesta[1]));
         }
+        
       }
     };
     xhttp.open("POST", "workflow.php", false);
@@ -203,11 +204,6 @@ function updateWFStates() {
   let strStArray = JSON.stringify(statesArray);
 
   var xhttp = new XMLHttpRequest();
-  xhttp.onreadystatechange = function () {
-    if (this.readyState == 4 && this.status == 200) {
-      respuesta = xhttp.responseText;
-    }
-  };
   xhttp.open("POST", "workflow.php", false);
   var formData = new FormData();
   formData.append("option", 2);
@@ -216,3 +212,63 @@ function updateWFStates() {
   formData.append("wfIndex", wfIndex);
   xhttp.send(formData);
 }
+
+//Delete workflows
+function deleteWF() {
+  let workflowName = document.getElementById("workflowName").innerHTML;
+  var xhttp = new XMLHttpRequest();
+ 
+  xhttp.open("POST", "workflow.php", false);
+  var formData = new FormData();
+  formData.append("option", 3);
+  formData.append("name", workflowName);
+  xhttp.send(formData);
+  document.location.reload();
+  
+}
+
+//Update workflow name
+function update_wf_name() {
+  const workflowComboBox = document.getElementById("workflowsCombo");
+  const old_name = workflowComboBox.options[workflowComboBox.selectedIndex].text;
+  let new_name = document.getElementById("workflowName").innerHTML;
+ 
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function () {
+    if (this.readyState == 4 && this.status == 200) {
+      respuesta = eval("(" + xhttp.responseText + ")");
+
+      if (respuesta[0] == false) {
+        alert(JSON.stringify(respuesta[1]));
+      }
+      
+    }
+  };
+  xhttp.open("POST", "workflow.php", true);
+  var formData = new FormData();
+  formData.append("option", 2);
+  formData.append("action", 1);
+  formData.append("name", old_name);
+  formData.append("newName", new_name);
+  xhttp.send(formData);
+
+
+}
+
+//Update workflow description
+function update_wf_description() {
+  let workflowDescription = document.getElementById("workflowDescription").innerHTML;
+  const workflowComboBox = document.getElementById("workflowsCombo");
+  const name = workflowComboBox.options[workflowComboBox.selectedIndex].text;
+  var xhttp = new XMLHttpRequest();
+  xhttp.open("POST", "workflow.php", false);
+  var formData = new FormData();
+  formData.append("option", 2);
+  formData.append("action", 2);
+  formData.append("name", name);
+  formData.append("newDescription", workflowDescription);
+  xhttp.send(formData); 
+
+
+}
+

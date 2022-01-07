@@ -17,7 +17,7 @@
   <body>
       
     <!-- Navbar -->
-    <nav>
+    <nav class="navbar">
       <ul class="menu">
         <li>Inclusive Whiteboard</li>
         <li>  | Workflows:
@@ -34,7 +34,7 @@
           </select>
 
         </li>
-        <li><button>Delete</button></li>
+        <li><button  onclick="deleteWF()">Delete</button></li>
 
         <li>  | New workflow: <input placeholder="Name" type="text" name="new_wf_name" id="wf_name"></li>
         <li><input placeholder="Description" type="text" name="new_wf_description" id="wf_description"></li>
@@ -53,8 +53,8 @@
     <div class="content">
 
       <div class="current-workflow">
-        <h1 id="workflowName">Current Workflow</h1>
-        <p id="workflowDescription">Workflow description</p>
+        <h1 id="workflowName" contentEditable>Current Workflow</h1>
+        <p id="workflowDescription" contentEditable>Workflow description</p>
       </div>
 
       <div class="workflow">

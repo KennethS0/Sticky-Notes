@@ -6,6 +6,19 @@ document.getElementById("addColumnButton").addEventListener("click", (e) => {
 });
 
 
+document.getElementById("workflowName").onblur = () =>
+{
+    update_wf_name();
+    window.location.reload();
+  
+}
+
+document.getElementById("workflowDescription").onblur = () =>
+{
+    update_wf_description();
+}
+
+
 // Deletes columns along with its notes
 function deleteColumn(columnHeader) {
     // Obtains the index of the column
