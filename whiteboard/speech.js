@@ -15,6 +15,22 @@ speechRecognition.addEventListener('result', (e) => {
     }
 }); 
 
+// Pauses speech
+function pauseSpeech() {
+    if (speechSynthesis.speaking) {
+        speechSynthesis.pause();
+    }
+}
+
+// Continues speech
+function continueSpeech() {
+    if (speechSynthesis.paused) {
+        speechSynthesis.resume();
+        
+    }
+}
+
+
 // Start the speech recognition cycle
 speechRecognition.addEventListener('end', () => {
     speechRecognition.start();
@@ -28,34 +44,45 @@ function runCommand(command) {
 
     // Comando para leer la pizarra
     if (cmd.localeCompare('lee la pizarra') == 0) {
-        const headers = [...document.getElementsByTagName("th")];
-        const columns = [...document.getElementsByClassName("sticky-area")];
-        
-        // Headers & Columns have the same length
-        for (let i = 0; i < headers.length; i++) {
-            // Obtains the listen button from the header
-            const currentHeader = headers[i];
-            const listenButton = currentHeader.getElementsByTagName("button")[1];
-            speak("Columna número " + (i + 1) + " titulada: ");
-            listenButton.click();
-
-            // Obtains each note
-            const currentColumn = columns[i];
-            const notes = currentColumn.getElementsByClassName("sticky-note");
-            
-            // Reads every note
-            for (let i = 0; i < notes.length; i++) {
-                const note = notes[i];
-                note.getElementsByTagName("button")[0].click();
-            }
-        }
-
-    
+        readBoard();
     } else if (cmd.localeCompare('pausa') == 0) {
+        pauseSpeech();
+    } else if (cmd.localeCompare('continuar') == 0) {
+        continueSpeech();
+    }
 
-    } else {
+    else {
         console.log("failed " + command + ".");
     }
+}
+
+function readBoard() {
+    let string = "";
+
+    const headers = [...document.getElementsByTagName("th")];
+    const columns = [...document.getElementsByClassName("sticky-area")];
+        
+    // Headers & Columns have the same length
+    for (let i = 0; i < headers.length; i++) {
+
+        let currentHeader = headers[i]; 
+
+        // Obtains the listen button from the header 
+        string += "Columna número " + (i + 1) + " titulada: ";
+        string += currentHeader.getElementsByTagName('div')[0].textContent + ". ";
+
+        // Obtains each note
+        const currentColumn = columns[i];
+        const notes = currentColumn.getElementsByClassName("sticky-note");
+
+        // Reads every note
+        for (let i = 0; i < notes.length; i++) {
+            const note = notes[i];
+            string += note.getElementsByTagName("p")[0].textContent + ". ";
+            
+        }
+    }
+    speak(string);
 }
 
 // Talks to the user

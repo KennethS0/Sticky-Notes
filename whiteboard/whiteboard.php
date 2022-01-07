@@ -83,6 +83,10 @@
       </div>
 
     </div>
+    
+    <button onclick="pauseSpeech()">Pause</button>
+    <button onclick="continueSpeech()">Resume</button>
+
   </body>
 
   <script src="speech.js"></script>
