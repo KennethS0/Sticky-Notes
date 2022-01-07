@@ -5,7 +5,7 @@ document.getElementById("addColumnButton").addEventListener("click", (e) => {
     addNewColumn(name, position);
 });
 
-
+// Updates the name in the backend
 document.getElementById("workflowName").onblur = () =>
 {
     update_wf_name();
@@ -13,6 +13,7 @@ document.getElementById("workflowName").onblur = () =>
   
 }
 
+// Updates the description in the backend
 document.getElementById("workflowDescription").onblur = () =>
 {
     update_wf_description();
@@ -286,17 +287,14 @@ function addNewColumn(name, position=-1) {
 function reloadInsertOptions(length) {
     let select = document.getElementById("st_position");
     select.innerHTML = "";
-    console.log(length);
 
     let addOption = function (i) {
         let option = document.createElement("option");
         option.text = i + 1;
         select.appendChild(option);
-        console.log("Added option");
     }
 
     for (let index = 0; index < length + 1; index++) {
-        console.log("Adding option");
         addOption(index);
     }
 }
