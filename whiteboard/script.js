@@ -150,12 +150,13 @@ function loadStates(workflowName) {
           createNewNote(stickyArea, sticky);
         });
 
-        readBoard();
+        
       });
       let option = document.createElement("option");
       option.text = pos_count;
       select = document.getElementById("st_position");
       select.appendChild(option);
+      readBoard();
     }
   };
 
