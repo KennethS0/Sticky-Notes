@@ -19,6 +19,8 @@ $email=$_REQUEST["email"];
 $password=$_REQUEST["password"];
 
 $conn = get_conection();
+
+//Check if login is correct
 $result = login($conn,$email,$password);
 
 
