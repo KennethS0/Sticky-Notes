@@ -1,5 +1,6 @@
 <?php
 session_start();
+//logout actual session
 unset($_SESSION["email"]);
 
 

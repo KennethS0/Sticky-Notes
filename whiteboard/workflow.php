@@ -6,15 +6,11 @@ session_start();
 /*********Eliminar estando producción************/
 error_reporting(E_ERROR | E_WARNING | E_PARSE);
 ini_set("display_errors", 1);
-/*************************************************/
-// if(!isset($_REQUEST["name"]) && !isset($_REQUEST["description"]))
-// {
-//     echo ("[false,{'Error':'Debe enviar los parámetros name y description'}]");
-//     exit();
-// }
 
-
+//get actual session
 $email=$_SESSION["email"];
+
+
 $option = $_REQUEST["option"];
 
 $conn = get_conection();

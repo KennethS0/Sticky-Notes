@@ -19,6 +19,8 @@ $email=$_REQUEST["email"];
 $password=$_REQUEST["password"];
 
 $conn = get_conection();
+
+//check if already exist user
 $result = existUser($conn,$email);
 
 if(!$result){
