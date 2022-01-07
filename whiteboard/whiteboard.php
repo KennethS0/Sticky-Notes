@@ -84,6 +84,7 @@
 
     </div>
     
+    <button onclick="readBoard()">Read Board</button>
     <button onclick="pauseSpeech()">Pause</button>
     <button onclick="continueSpeech()">Resume</button>
 

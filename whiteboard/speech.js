@@ -18,15 +18,25 @@ speechRecognition.addEventListener('result', (e) => {
 // Pauses speech
 function pauseSpeech() {
     if (speechSynthesis.speaking) {
-        speechSynthesis.pause();
+        let x = speechSynthesis; 
+        x.pause();
+        
+        
+        console.log(x);
+        console.log(JSON.stringify(x));
+        console.log(toString(x));
+
+        window.localStorage.setItem("speech", window.speechSynthesis);
     }
 }
 
 // Continues speech
 function continueSpeech() {
     if (speechSynthesis.paused) {
-        speechSynthesis.resume();
-        
+        let speech = window.localStorage.getItem("speech");
+        if (speech) {
+            speechSynthesis.resume();
+        }
     }
 }
 
