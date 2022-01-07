@@ -149,6 +149,8 @@ function loadStates(workflowName) {
         stickies.forEach((sticky) => {
           createNewNote(stickyArea, sticky);
         });
+
+        readBoard();
       });
       let option = document.createElement("option");
       option.text = pos_count;
